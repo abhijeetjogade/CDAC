@@ -1,0 +1,19 @@
+1) Write a java program to find duplicate elements in an array
+
+public class Questions_100days{ 
+   public static void main(String[] args) {
+   int[] array {5,8,5,7,9,8,1,7};
+   System.out.println("Duplicate elements in the array's are: ");
+   //here we compare arrays i.e arr[i]=arr[i+1]
+   for (int i=0; i < array.length-1; i++) {
+     for (int j=i+1; j < array.length; j++) {
+       if (array[i] array[j]) {
+             System.out.println(array[i]);
+                break; //if duplicate found break
+        }
+       }
+     }
+  }
+}
+      
+            
