@@ -15,5 +15,29 @@ public class Questions_100days{
      }
   }
 }
+
+2)Write an efficient Java program to return the maximum occurring character in the input string
+
+public class Questions100days {
+     public static char MaxChar(String str) {
+       int[] counts = new int[256]; // ASCII CHARACTERS 256
+       char [] chars = str. toCharArray(); //string into an array of characters
+       for(char c : chars)
+       counts [ c]++;
+       char maxCharacter = 0;
+       int maxCount = 0;
+       for (int i = 0; i < counts. length; i++)
+          if (counts[i] > maxCount) {
+            maxCount = counts [i];
+            maxCharacter = (char)i; // converted Int to char
+          }
+       return maxCharacter;
+      }
+
+      public static void main(String[] args) {
+            System. out. println("Maximum occurring character is: " + MaxChar("Abhijeet"));
+       }
+}
+
       
             
