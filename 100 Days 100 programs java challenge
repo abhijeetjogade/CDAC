@@ -39,5 +39,34 @@ public class Questions100days {
        }
 }
 
+3)Write a Java program to check the equality of two arrays?
+
+import java.util.*;
+class Lelo_kuch_bhi{
+    public static boolean Equalitycheck(int[] arr1, int[] arr2) {
+        if (arr1 == null || arr2 == null || arr1.length != arr2.length)
+            return false;
+        ArrayList<Integer> list1 = new ArrayList<Integer>();
+        ArrayList<Integer> list2 = new ArrayList<Integer>(); 
+        for (int num : arr1) {
+            list1.add(num);
+        }
+        for (int num : arr2) {
+            list2.add(num);
+        }
+        return list1.equals(list2);
+    }
+    public static void main(String[] args) {
+        int[] array1 = {11, 25, 53, 84, 15};
+        int[] array2 = {12, 25, 53, 84, 15};
+        boolean Equal = Equalitycheck(array1, array2);
+        if(Equal) {
+            System.out.println("The arrays are equal.");
+        } else {
+            System.out.println("The arrays are not equal.");
+        }
+    }
+}
+
       
             
