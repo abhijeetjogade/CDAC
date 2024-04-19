@@ -1,0 +1,12 @@
+1) Which field of the Customers table is the primary key?
+-> a unique identification number, such as an ID number or a serial number or code, serves as a primary key in a table. For example, you might have a Customers table where each customer has a unique customer ID number. The customer ID field is the primary key
+
+2) What is the 4th column of the Customers table?
+->RATING
+
+3) What is another word for row? For column?
+->Row = Record or Tuple
+  Column = Column
+
+4) Why isn’t it possible to see the first five rows of a table?
+-> it could be due to access restrictions or privileges set by the database administrator. Additionally, if the table is empty or if there are fewer than five rows in the table, you wouldn't see five rows returned
