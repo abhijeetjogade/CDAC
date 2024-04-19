@@ -1,0 +1,52 @@
+
+mysql> SELECT * FROM Supplier ORDER BY CITY DESC;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S2   | Supplier 2 |     20 | Paris  |
+| S1   | Supplier 1 |     10 | London |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT * FROM Part ORDER BY CITY ASC, PNAME ASC;
+ERROR 1146 (42S02): Table 'juhu.part' doesn't exist
+mysql> SELECT * FROM Parts ORDER BY CITY ASC, Pname ASC;
++------+--------+-------+--------+--------+
+| P#   | Pname  | Color | Weight | City   |
++------+--------+-------+--------+--------+
+| P3   | Part 3 | Green |  11.80 | Athens |
+| P1   | Part 1 | Red   |  13.50 | London |
+| P2   | Part 2 | Blue  |  14.20 | Paris  |
++------+--------+-------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Supplier WHERE STATUS BETWEEN 10 AND 20;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
+| S2   | Supplier 2 |     20 | Paris  |
++------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT PNAME, WEIGHT FROM Parts WHERE WEIGHT NOT BETWEEN 10 AND 15;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Parts WHERE PNAME LIKE 'S%';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Supplier WHERE CITY LIKE 'L%';
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
++------+------------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Project WHERE SUBSTRING(JNAME, 3, 1) = 'n';
+ERROR 1146 (42S02): Table 'juhu.project' doesn't exist
+mysql> SELECT * FROM Projects WHERE SUBSTRING(JNAME, 3, 1) = 'n';
+Empty set (0.02 sec)
+
+mysql>
