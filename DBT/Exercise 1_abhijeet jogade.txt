@@ -1,0 +1,268 @@
+Microsoft Windows [Version 10.0.22621.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\hp>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u abhi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 40
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| juhu               |
+| performance_schema |
++--------------------+
+3 rows in set (0.04 sec)
+
+mysql> use juhu;
+Database changed
+mysql> desc juhu;
+ERROR 1146 (42S02): Table 'juhu.juhu' doesn't exist
+mysql> select * from juhu;
+ERROR 1146 (42S02): Table 'juhu.juhu' doesn't exist
+mysql> create table supplier
+    -> ^C
+mysql> CREATE TABLE SUPPLIER(S# VARCHAR(10),Sname VARCHAR(50),Status INT,City VARCHAR(50));
+    ->
+    -> ^C
+mysql> create table supplier(
+    -> s# varchar(10),
+    -> sname varchar(50),
+    -> status int,
+    -> city varchar(50)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sname varchar(50),
+status int,
+city varchar(50)
+)' at line 3
+mysql> create table supplier(
+    -> s# varchar(255),
+    -> sname varchar(255),
+    -> status int,
+    -> city varchar(255) );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sname varchar(255),
+status int,
+city varchar(255) )' at line 3
+mysql> clear
+mysql> cl sc
+    -> ^C
+mysql> exit
+Bye
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>clear screen
+'clear' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u abhi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 41
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| juhu               |
+| performance_schema |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> use juhu;
+Database changed
+mysql> CREATE TABLE supplier (
+    -> `s#` VARCHAR(255),
+    -> sname VARCHAR(255),
+    -> status INT,
+    -> city VARCHAR(255)
+    -> );
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> INSERT INTO SUPPLIER (S#, Sname, Status, City) VALUES
+    -> ('S1', 'Supplier 1', 10, 'London'),
+    -> ('S2', 'Supplier 2', 20, 'Paris'),
+    -> ('S3', 'Supplier 3', 30, 'Athens');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('S1', 'Supplier 1', 10, 'London'),
+('S2', 'Supplier 2', 20, 'Paris'),
+('S3', 'S' at line 2
+mysql> INSERT INTO SUPPLIER (`S#`, Sname, Status, City) VALUES
+    -> ('S1', 'Supplier 1', 10, 'London'),
+    -> ('S2', 'Supplier 2', 20, 'Paris'),
+    -> ('S3', 'Supplier 3', 30, 'Athens');
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE PARTS (
+    -> `P#` VARCHAR(10),
+    -> Pname VARCHAR(50),
+    -> Color VARCHAR(20),
+    -> Weight DECIMAL(10,2),
+    -> City VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO PARTS (`P#`, Pname, Color, Weight, City) VALUES
+    -> ('P1', 'Part 1', 'Red', 13.5, 'London'),
+    -> ('P2', 'Part 2', 'Blue', 14.2, 'Paris'),
+    -> ('P3', 'Part 3', 'Green', 11.8, 'Athens');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE PROJECTS (
+    -> `J#` VARCHAR(10),
+    ->  Jname VARCHAR(50),
+    -> City VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> INSERT INTO PROJECTS (J#, Jname, City) VALUES
+    -> ^C
+mysql>  INSERT INTO PROJECTS (`J#`, Jname, City) VALUES
+    -> ('J1', 'Project 1', 'London'),
+    -> ('J2', 'Project 2', 'Paris'),
+    -> ('J3', 'Project 3', 'Athens');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE SPJ (
+    -> `S#` VARCHAR(10),
+    -> `P#` VARCHAR(10),
+    -> `J#` VARCHAR(10),
+    -> Qty INT
+    -> );
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> INSERT INTO SPJ (`S#`, `P#`, `J#`, Qty) VALUES
+    -> ('S1', 'P1', 'J1', 100),
+    -> ('S2', 'P2', 'J2', 150),
+    -> ('S3', 'P3', 'J3', 200);
+Query OK, 3 rows affected (0.09 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM SUPPLIER;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT S#, Sname FROM SUPPLIER;
+    -> ^C
+mysql> SELECT `S#`, Sname FROM SUPPLIER;
++------+------------+
+| S#   | Sname      |
++------+------------+
+| S1   | Supplier 1 |
+| S2   | Supplier 2 |
+| S3   | Supplier 3 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Pname, Color FROM PARTS WHERE City = 'London';
++--------+-------+
+| Pname  | Color |
++--------+-------+
+| Part 1 | Red   |
++--------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SUPPLIER WHERE City = 'London';
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
++------+------------+--------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM SUPPLIER WHERE City IN ('Paris', 'Athens');
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PROJECTS WHERE City = 'Athens';
++------+-----------+--------+
+| J#   | Jname     | City   |
++------+-----------+--------+
+| J3   | Project 3 | Athens |
++------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Pname FROM PARTS WHERE Weight BETWEEN 12 AND 14;
++--------+
+| Pname  |
++--------+
+| Part 1 |
++--------+
+1 row in set (0.02 sec)
+
+mysql> SELECT * FROM SUPPLIER WHERE Status >= 20;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM SUPPLIER WHERE City <> 'London';
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT City FROM SUPPLIER;
++--------+
+| City   |
++--------+
+| London |
+| Paris  |
+| Athens |
++--------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT Pname, Weight,
+    -> Weight * 1000 AS Weight_in_MILLIGRAMS,
+    -> Weight / 1000 AS Weight_in_KILOGRAMS
+    -> FROM PARTS;
++--------+--------+----------------------+---------------------+
+| Pname  | Weight | Weight_in_MILLIGRAMS | Weight_in_KILOGRAMS |
++--------+--------+----------------------+---------------------+
+| Part 1 |  13.50 |             13500.00 |            0.013500 |
+| Part 2 |  14.20 |             14200.00 |            0.014200 |
+| Part 3 |  11.80 |             11800.00 |            0.011800 |
++--------+--------+----------------------+---------------------+
+3 rows in set (0.02 sec)
+
+mysql>
