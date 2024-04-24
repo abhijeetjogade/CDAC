@@ -1,0 +1,316 @@
+1)Write a program that takes a numerical grade as input and outputs the corresponding letter
+  grade using if-else statements. 
+
+  import java.util.Scanner;
+class Abhi{
+    public static void main(String[] args){
+        System.out.println("Enter the Marks:");
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        if(num>=90){
+         System.out.println("your grade is A+");
+        } 
+        else if (num>=75 && num<90){
+         System.out.println("your grade is A");
+        } 
+        else if (num>=60 && num<75){
+         System.out.println("your grade is B");
+        }
+        else{
+         System.out.println("your grade is C");
+        } 
+
+
+    }
+}
+
+2)Write a program that checks if a given year is a leap year or not using both if-else and
+switch-case.
+
+  import java.util.Scanner;
+class Assign2{
+    public static void main(String[] args){
+        System.out.println("Enter the year:");
+        Scanner sc = new Scanner(System.in);
+        int year = sc.nextInt();
+        /*if(year/4==0 || year/400==0){
+            System.out.println("leap year");
+        }
+        else{
+            System.out.println("not leap year");
+        }*/
+        boolean isLeapYear;
+
+        switch (year % 400) {
+            case 0:
+                isLeapYear = true;
+                break;
+            default:
+                switch (year % 100) {
+                    case 0:
+                        isLeapYear = false;
+                        break;
+                    default:
+                        switch (year % 4) {
+                            case 0:
+                                isLeapYear = true;
+                                break;
+                            default:
+                                isLeapYear = false;
+                                break;
+                        }
+                }
+        }
+
+        if (isLeapYear) {
+            System.out.println(year + " is a leap year.");
+        } else {
+            System.out.println(year + " is not a leap year.");
+        }
+    }
+}
+
+3)Implement a simple calculator program that takes two numbers and an operator (+, -, *, /) as
+input and performs the operation using switch-case. 
+
+  import java.util.Scanner;
+
+class Assig3  {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the first number: ");
+        double num1 = scanner.nextDouble();
+
+        System.out.print("Enter the second number: ");
+        double num2 = scanner.nextDouble();
+
+        System.out.print("Enter the operator (+, -, *, /): ");
+        char operator = scanner.next().charAt(0);
+
+        double result = 0;
+
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 != 0) {
+                    result = num1 / num2;
+                } else {
+                    System.out.println("Error: Cannot divide by zero");
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Error: Invalid operator");
+                return;
+        }
+
+        System.out.println("Result: " + result);
+
+        
+    }
+}
+
+4)Write a program that takes a number representing a weekday (1-7) and prints the name of the
+weekday using switch-case.
+
+  import java.util.Scanner;
+
+class Assignq4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number between (1-7): ");
+        int weekday = scanner.nextInt();
+        String weekdayName;
+
+        switch (weekday) {
+            case 1:
+                weekdayName = "Monday";
+                break;
+            case 2:
+                weekdayName = "Tuesday";
+                break;
+            case 3:
+                weekdayName = "Wednesday";
+                break;
+            case 4:
+                weekdayName = "Thursday";
+                break;
+            case 5:
+                weekdayName = "Friday";
+                break;
+            case 6:
+                weekdayName = "Saturday";
+                break;
+            case 7:
+                weekdayName = "Sunday";
+                break;
+            default:
+                weekdayName = "Invalid weekday";
+                break;
+        }
+
+        System.out.println("The weekday is " + weekday + " is: " + weekdayName);
+
+        
+    }
+}
+
+5)Write a program that takes a character as input and determines whether it’s a vowel or a
+consonant using if-else
+
+  import java.util.Scanner;
+class aasign5 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a character: ");
+        char ch = scanner.next().charAt(0);
+
+        // Convert the character to lowercase for easier comparison
+        ch = Character.toLowerCase(ch);
+
+        // Check if the input is a letter
+        if (Character.isLetter(ch)) {
+            switch (ch) {
+                case 'a':
+                case 'e':
+                case 'i':
+                case 'o':
+                case 'u':
+                    System.out.println(ch + " is a vowel.");
+                    break;
+                default:
+                    System.out.println(ch + " is a consonant.");
+            }
+        } else {
+            System.out.println("Invalid input. Please enter an alphabet.");
+        }
+
+        
+    }
+}
+
+6)Implement a program that calculates the Body Mass Index (BMI) based on height and weight
+input using if-else to classify the BMI int categories (underweight, normal weight, overweight,
+etc.).
+
+  import java.util.Scanner;
+class Assign6 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter your weight in kilograms: ");
+        double weight = sc.nextDouble();
+
+        System.out.println("Enter your height in meters: ");
+        double height = sc.nextDouble();
+
+        double bmi = calculateBMI(weight, height);
+        System.out.println("Your BMI is: " + bmi);
+        
+        if (bmi < 18.5) {
+            System.out.println("You are underweight.");
+        }else if (bmi >= 18.5 && bmi < 25) {
+            System.out.println("You have a normal weight.");
+        }else if (bmi >= 25 && bmi < 30) {
+            System.out.println("You are overweight.");
+        }else {
+            System.out.println("You are obese.");
+        }
+        
+        
+    }
+
+    public static double calculateBMI(double weight, double height) {
+        return weight / (height * height);
+    }
+}
+
+
+7) Write a program that demonstrates widening conversion from int to double and prints the result. 
+
+  class assign3_q1 {
+    public static void main(String[] args) {
+        int intValue = 10;
+        double doubleValue = intValue; // Widening conversion from int to double
+
+        System.out.println("Integer value: " + intValue);
+        System.out.println("Double value after widening conversion: " + doubleValue);
+    }
+
+  8)Create a program that demonstrates narrowing conversion from double to int and prints the result
+
+    import java.util.Scanner;
+class assign3_q2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a double value: ");
+        double doubleValue = scanner.nextDouble();
+        
+        int intValue = (int) doubleValue; // Narrowing conversion
+        
+        System.out.println("Original Double Value: " + doubleValue);
+        System.out.println("Narrowed Integer Value: " + intValue);
+        
+    
+    }
+}
+
+  9)Write a program that performs arithmetic operations involving different data types (int, double, float)
+and observes how Java handles widening conversions automatically
+
+  class assign3_q3{
+    public static void main(String[] args) {
+        int numInt = 10;
+        double numDouble = 5.5;
+        float numFloat = 3.5f;
+
+        // Widening conversion of int to double
+        double result1 = numInt + numDouble;
+        System.out.println("Result of int + double: " + result1);
+
+        // Widening conversion of int to float
+        float result2 = numInt + numFloat;
+        System.out.println("Result of int + float: " + result2);
+
+        // Widening conversion of float to double
+        double result3 = numFloat + numDouble;
+        System.out.println("Result of float + double: " + result3);
+    }
+}
+
+  10)Write a Program that demonstrates widening conversion from int to (double,float, boolean, string) and
+prints the result.
+
+  class assign3_q4{
+    public static void main(String[] args) {
+        int intValue = 10;
+
+        // Widening conversion to double
+        double doubleValue = intValue;
+        System.out.println("Widening conversion to double: " + doubleValue);
+
+        // Widening conversion to float
+        float floatValue = intValue;
+        System.out.println("Widening conversion to float: " + floatValue);
+
+        // Widening conversion to boolean
+        boolean booleanValue = intValue != 0;
+        System.out.println("Widening conversion to boolean: " + booleanValue);
+
+        // Widening conversion to String
+        String stringValue = Integer.toString(intValue);
+        System.out.println("Widening conversion to String: " + stringValue);
+    }
+}
