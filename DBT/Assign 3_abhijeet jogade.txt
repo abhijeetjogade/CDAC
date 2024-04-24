@@ -1,0 +1,6 @@
+1) Does ANSI recognize the data type DATE?
+--> ANSI SQL does recognize the DATE data type. It's a standard data type for representing dates without any time component.
+
+
+2) Which subdivision of SQL is used to insert values in tables?
+--> DML is responsible for querying and modifying data within a database. The INSERT statement, specifically, is part of DML and is used to insert new rows of data into a table

@@ -1,0 +1,76 @@
+1) Write a select command that produces the order number, amount, and date for all rows in the Orders table.
+--> 
+mysql> SELECT onum, amt, odate
+    -> FROM Orders;
++------+---------+------------+
+| onum | amt     | odate      |
++------+---------+------------+
+| 3001 |   18.69 | 1990-10-03 |
+| 3002 |  1900.1 | 1990-10-03 |
+| 3003 |  767.19 | 1990-10-03 |
+| 3005 | 5160.45 | 1990-10-03 |
+| 3006 | 1098.16 | 1990-10-03 |
+| 3007 |   75.75 | 1990-10-04 |
+| 3008 |    4723 | 1990-10-05 |
+| 3009 | 1713.23 | 1990-10-04 |
+| 3010 | 1309.95 | 1990-10-06 |
+| 3011 | 9891.88 | 1990-10-06 |
++------+---------+------------+
+10 rows in set (0.00 sec)
+
+2) Write a query that produces all rows from the Customers table for which the salesperson’s number is 1001.
+-->
+mysql> SELECT *
+    -> FROM Customers
+    ->  WHERE snum = 1001;
++------+---------+--------+--------+------+
+| Cnum | Cname   | City   | Rating | Snum |
++------+---------+--------+--------+------+
+| 2001 | Hoffman | London |    100 | 1001 |
+| 2006 | Clemens | London |    100 | 1001 |
++------+---------+--------+--------+------+
+2 rows in set (0.00 sec)
+
+3) Write a query that displays the Salespeople table with the columns in the following order: city, sname, snum, comm.
+-->
+mysql> SELECT city, sname, snum, comm
+    -> FROM Salespeople;
++-----------+---------+------+------+
+| city      | sname   | snum | comm |
++-----------+---------+------+------+
+| London    | Peel    | 1001 | 0.12 |
+| San Jose  | Serres  | 1002 | 0.13 |
+| London    | Motika  | 1004 | 0.11 |
+| Barcelona | Rifkin  | 1007 | 0.15 |
+| New York  | Axelrod | 1003 | 0.10 |
++-----------+---------+------+------+
+5 rows in set (0.00 sec)
+
+4) Write a select command that produces the rating followed by the name of each customer in San Jose.
+-->
+mysql> SELECT rating, cname
+    -> FROM Customers
+    -> WHERE city = 'San Jose';
++--------+----------+
+| rating | cname    |
++--------+----------+
+|    200 | Liu      |
+|    300 | Cisneros |
++--------+----------+
+2 rows in set (0.00 sec)
+
+5) Write a query that will produce the snum values of all salespeople (suppress the duplicates) with orders in the Orders table.
+-->mysql> SELECT DISTINCT snum
+    -> FROM Orders;
++------+
+| snum |
++------+
+| 1007 |
+| 1004 |
+| 1001 |
+| 1002 |
+| 1003 |
++------+
+5 rows in set (0.00 sec)
+
+mysql>

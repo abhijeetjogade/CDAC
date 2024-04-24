@@ -1,0 +1,82 @@
+1) Write a query that lists each order number followed by the name of the customer who made the order.
+-->
+mysql> SELECT Onum , cname
+    -> FROM Orders
+    -> JOIN Customers ON Orders.Cnum = Customers.Cnum;
++------+----------+
+| Onum | cname    |
++------+----------+
+| 3001 | Giovanni |
+| 3002 | Hoffman  |
+| 3003 | Cisneros |
+| 3005 | Pereira  |
+| 3006 | Liu      |
+| 3007 | Giovanni |
+| 3008 | Grass    |
+| 3009 | Cisneros |
+| 3010 | Clemens  |
+| 3011 | Hoffman  |
++------+----------+
+10 rows in set (0.00 sec)
+
+mysql>
+
+2) Write a query that gives the names of both the salesperson and the customer for each order along with the order number.
+-->
+mysql> SELECT Orders.onum, Customers.cname, Salespeople.sname
+    -> FROM Orders
+    -> JOIN Customers ON Orders.Cnum = Customers.Cnum
+    -> JOIN Salespeople ON Orders.Snum = Salespeople.Snum;
++------+----------+---------+
+| onum | cname    | sname   |
++------+----------+---------+
+| 3001 | Giovanni | Rifkin  |
+| 3002 | Hoffman  | Motika  |
+| 3003 | Cisneros | Peel    |
+| 3005 | Pereira  | Serres  |
+| 3006 | Liu      | Rifkin  |
+| 3007 | Giovanni | Serres  |
+| 3008 | Grass    | Peel    |
+| 3009 | Cisneros | Axelrod |
+| 3010 | Clemens  | Serres  |
+| 3011 | Hoffman  | Peel    |
++------+----------+---------+
+10 rows in set (0.00 sec)
+
+3) Write a query that produces all customers serviced by salespeople with a commission above 12%. Output the customer’s name, the salesperson’s name, and the salesperson’s rate of commission.
+-->
+mysql>  SELECT Customers.CName, Salespeople.SName, Salespeople.Comm
+    -> FROM Customers
+    -> JOIN Orders ON Customers.Cnum = Orders.Cnum
+    -> JOIN Salespeople ON Orders.Snum = Salespeople.Snum
+    -> WHERE Salespeople.Comm > 0.12;
++----------+--------+------+
+| CName    | SName  | Comm |
++----------+--------+------+
+| Giovanni | Rifkin | 0.15 |
+| Pereira  | Serres | 0.13 |
+| Liu      | Rifkin | 0.15 |
+| Giovanni | Serres | 0.13 |
+| Clemens  | Serres | 0.13 |
++----------+--------+------+
+5 rows in set (0.00 sec)
+
+
+4) Write a query that calculates the amount of the salesperson’s commission on each order by a customer with a rating above 100
+-->
+mysql> SELECT Orders.Onum, (Orders.Amt * Salespeople.Comm) AS Commission
+    -> FROM Orders
+    -> JOIN Customers ON Orders.Cnum = Customers.Cnum
+    -> JOIN Salespeople ON Orders.snum = Salespeople.snum
+    -> WHERE Customers.Rating > 100;
++------+-------------------+
+| Onum | Commission        |
++------+-------------------+
+| 3008 | 566.7599873319268 |
+| 3003 | 92.06279823520481 |
+| 3007 | 9.847499638795853 |
+| 3006 |  164.724011672497 |
+| 3001 | 2.803500191509727 |
+| 3009 | 171.3230005997866 |
++------+-------------------+
+6 rows in set (0.00 sec)

@@ -1,0 +1,158 @@
+Microsoft Windows [Version 10.0.22621.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\hp>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u abhi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 46
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| juhu               |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use juhu;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_juhu |
++----------------+
+| customers      |
+| dept           |
+| emp            |
+| orders         |
+| parts          |
+| projects       |
+| salespeople    |
+| sedt           |
+| semp           |
+| spj            |
+| supplier       |
++----------------+
+11 rows in set (0.08 sec)
+
+mysql> select * from supplier;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(UPPER(SUBSTRING(sname, 1, 1)), LOWER(SUBSTRING(sname, 2))) AS Capitalized_Supplier_Names FROM supplier;
++----------------------------+
+| Capitalized_Supplier_Names |
++----------------------------+
+| Supplier 1                 |
+| Supplier 2                 |
+| Supplier 3                 |
++----------------------------+
+3 rows in set (0.03 sec)
+
+mysql> SELECT UPPER(sname) AS Uppercase_Supplier_Names FROM Supplier;
++--------------------------+
+| Uppercase_Supplier_Names |
++--------------------------+
+| SUPPLIER 1               |
+| SUPPLIER 2               |
+| SUPPLIER 3               |
++--------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT LOWER(sname) AS Lowercase_Supplier_Names FROM Supplier;
++--------------------------+
+| Lowercase_Supplier_Names |
++--------------------------+
+| supplier 1               |
+| supplier 2               |
+| supplier 3               |
++--------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT LPAD(sname, 25, ' ') AS Padded_Supplier_Names FROM supplier;
++---------------------------+
+| Padded_Supplier_Names     |
++---------------------------+
+|                Supplier 1 |
+|                Supplier 2 |
+|                Supplier 3 |
++---------------------------+
+3 rows in set (0.02 sec)
+
+mysql> SELECT REPLACE(sname, 'la', 'ro') AS Replaced_Supplier_Names FROM supplier;
++-------------------------+
+| Replaced_Supplier_Names |
++-------------------------+
+| Supplier 1              |
+| Supplier 2              |
+| Supplier 3              |
++-------------------------+
+3 rows in set (0.18 sec)
+
+mysql> SELECT REPLACE(REPLACE(sname, 'l', 'r'), 'a', 'o') AS Custom_Replaced_Supplier_Names FROM supplier;
++--------------------------------+
+| Custom_Replaced_Supplier_Names |
++--------------------------------+
+| Supprier 1                     |
+| Supprier 2                     |
+| Supprier 3                     |
++--------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT sname, LENGTH(sname) AS Name_Length FROM supplier;
++------------+-------------+
+| sname      | Name_Length |
++------------+-------------+
+| Supplier 1 |          10 |
+| Supplier 2 |          10 |
+| Supplier 3 |          10 |
++------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM supplier WHERE SOUNDEX(sname) = SOUNDEX('BLOKE');
+Empty set (0.03 sec)
+
+mysql> SELECT sname,
+    -> CASE status
+    -> WHEN 10 THEN 'Ten'
+    -> WHEN 20 THEN 'Twenty'
+    -> WHEN 30 THEN 'Thirty'
+    -> ELSE 'Unknown'
+    -> END AS Status_Description
+    -> FROM supplier;
++------------+--------------------+
+| sname      | Status_Description |
++------------+--------------------+
+| Supplier 1 | Ten                |
+| Supplier 2 | Twenty             |
+| Supplier 3 | Thirty             |
++------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT DAYNAME(CURRENT_DATE()) AS Current_Day;
++-------------+
+| Current_Day |
++-------------+
+| Tuesday     |
++-------------+
+1 row in set (0.63 sec)
+
+mysql>

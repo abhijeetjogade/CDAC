@@ -1,0 +1,234 @@
+Microsoft Windows [Version 10.0.22621.3447]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\hp>cd  C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u abhi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 47
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| juhu               |
+| performance_schema |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> use juhu;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_juhu |
++----------------+
+| customers      |
+| dept           |
+| emp            |
+| orders         |
+| parts          |
+| projects       |
+| salespeople    |
+| sedt           |
+| semp           |
+| spj            |
+| supplier       |
++----------------+
+11 rows in set (0.17 sec)
+
+mysql> select * from supplier;
++------+------------+--------+--------+
+| s#   | sname      | status | city   |
++------+------------+--------+--------+
+| S1   | Supplier 1 |     10 | London |
+| S2   | Supplier 2 |     20 | Paris  |
+| S3   | Supplier 3 |     30 | Athens |
++------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT MIN(status) AS Minimum_Status FROM Supplier;
++----------------+
+| Minimum_Status |
++----------------+
+|             10 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(weight) AS Maximum_Weight FROM Parts;
++----------------+
+| Maximum_Weight |
++----------------+
+|          14.20 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(weight) AS Average_Weight FROM Parts;
++----------------+
+| Average_Weight |
++----------------+
+|      13.166667 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(quantity) AS Total_Quantity_Sold_For_P1 FROM Sales WHERE part = 'P1';
+ERROR 1146 (42S02): Table 'juhu.sales' doesn't exist
+mysql>  SELECT SUM(quantity) AS Total_Quantity_Sold_For_P1 FROM salespeople WHERE part = 'P1';
+ERROR 1054 (42S22): Unknown column 'quantity' in 'field list'
+mysql> SELECT SUM(quantity) AS Total_Quantity_Sold_For_P1 FROM Sales WHERE parts = 'P1';
+ERROR 1146 (42S02): Table 'juhu.sales' doesn't exist
+mysql> select * from parts;
++------+--------+-------+--------+--------+
+| P#   | Pname  | Color | Weight | City   |
++------+--------+-------+--------+--------+
+| P1   | Part 1 | Red   |  13.50 | London |
+| P2   | Part 2 | Blue  |  14.20 | Paris  |
+| P3   | Part 3 | Green |  11.80 | Athens |
++------+--------+-------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT SUM(quantity) AS Total_Quantity_Sold_For_P1 FROM parts WHERE p# = 'P1';
+    -> ^C
+mysql> SELECT SUM(quantity) AS Total_Quantity_Sold_For_P1 FROM parts WHERE `p#` = 'P1';
+ERROR 1054 (42S22): Unknown column 'quantity' in 'field list'
+mysql> select * from orders;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2002 | 1007 |
+| 3002 |  1900.1 | 1990-10-03 | 2001 | 1004 |
+| 3003 |  767.19 | 1990-10-03 | 2008 | 1001 |
+| 3005 | 5160.45 | 1990-10-03 | 2007 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2003 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2002 | 1002 |
+| 3008 |    4723 | 1990-10-05 | 2004 | 1001 |
+| 3009 | 1713.23 | 1990-10-04 | 2008 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2006 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2001 | 1001 |
++------+---------+------------+------+------+
+10 rows in set (0.02 sec)
+
+mysql> select * from spj;
++------+------+------+------+
+| S#   | P#   | J#   | Qty  |
++------+------+------+------+
+| S1   | P1   | J1   |  100 |
+| S2   | P2   | J2   |  150 |
+| S3   | P3   | J3   |  200 |
++------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT SUM(qty) AS Total_Quantity_Sold_For_P1 FROM spj WHERE parts = 'P1';
+ERROR 1054 (42S22): Unknown column 'parts' in 'where clause'
+mysql> SELECT SUM(qty) AS Total_Quantity_Sold_For_P1 FROM spj WHERE `p#` = 'P1';
++----------------------------+
+| Total_Quantity_Sold_For_P1 |
++----------------------------+
+|                        100 |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT `p#`, SUM(qty) AS Total_Quantity_Sold FROM spj GROUP BY `#p`;
+ERROR 1054 (42S22): Unknown column '#p' in 'group statement'
+mysql> SELECT `p#`, SUM(qty) AS Total_Quantity_Sold FROM spj GROUP BY `p#`;
++------+---------------------+
+| p#   | Total_Quantity_Sold |
++------+---------------------+
+| P1   |                 100 |
+| P2   |                 150 |
+| P3   |                 200 |
++------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT 'p#`, AVG(qty) AS Average_Quantity_Sold FROM spj GROUP BY `p#`;
+    '> ^C
+mysql> SELECT `p#`, AVG(qty) AS Average_Quantity_Sold FROM spj GROUP BY `p#`;
++------+-----------------------+
+| p#   | Average_Quantity_Sold |
++------+-----------------------+
+| P1   |              100.0000 |
+| P2   |              150.0000 |
+| P3   |              200.0000 |
++------+-----------------------+
+3 rows in set (0.03 sec)
+
+mysql> select * from salespeople;
++------+---------+-----------+------+
+| Snum | Sname   | City      | Comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
++------+---------+-----------+------+
+5 rows in set (0.03 sec)
+
+mysql> SELECT `p#`, MAX(qty) AS Maximum_Quantity_Sold
+    -> FROM spj
+    -> GROUP BY `p#`
+    -> HAVING MAX(qty) > 800;
+Empty set (0.00 sec)
+
+mysql> SELECT status, COUNT(*) AS Supplier_Count FROM Supplier GROUP BY status;
++--------+----------------+
+| status | Supplier_Count |
++--------+----------------+
+|     10 |              1 |
+|     20 |              1 |
+|     30 |              1 |
++--------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT city, COUNT(*) AS Project_Count FROM Projects GROUP BY city;
++--------+---------------+
+| city   | Project_Count |
++--------+---------------+
+| London |             1 |
+| Paris  |             1 |
+| Athens |             1 |
++--------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT status, COUNT(*) AS Count
+    -> FROM Supplier
+    -> GROUP BY status;
++--------+-------+
+| status | Count |
++--------+-------+
+|     10 |     1 |
+|     20 |     1 |
+|     30 |     1 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT
+    -> CASE status
+    -> WHEN 10 THEN 'Ten'
+    ->  WHEN 20 THEN 'Twenty'
+    -> WHEN 30 THEN 'Thirty'
+    -> ELSE 'Unknown'
+    -> END AS Status,
+    -> COUNT(*) AS Count
+    -> FROM Supplier
+    -> GROUP BY status;
++--------+-------+
+| Status | Count |
++--------+-------+
+| Ten    |     1 |
+| Twenty |     1 |
+| Thirty |     1 |
++--------+-------+
+3 rows in set, 1 warning (0.02 sec)
+
+mysql>

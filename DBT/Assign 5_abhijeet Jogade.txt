@@ -1,0 +1,117 @@
+1) Write a query that will give you all orders for more than Rs. 1,000.
+-->
+mysql> SELECT *
+    -> FROM Orders
+    -> WHERE amt > 1000;
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3002 |  1900.1 | 1990-10-03 | 2001 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2007 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2003 | 1007 |
+| 3008 |    4723 | 1990-10-05 | 2004 | 1001 |
+| 3009 | 1713.23 | 1990-10-04 | 2008 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2006 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2001 | 1001 |
++------+---------+------------+------+------+
+7 rows in set (0.00 sec)
+
+mysql>
+
+2) Write a query that will give you the names and cities of all salespeople in London with a commission above .10.
+-->
+mysql> SELECT sname, city
+    -> FROM Salespeople
+    -> WHERE city = 'London' AND comm > 0.10;
++--------+--------+
+| sname  | city   |
++--------+--------+
+| Peel   | London |
+| Motika | London |
++--------+--------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+3) Write a query on the Customers table whose output will exclude all customers with a rating <= 100, unless they are located in Rome.
+-->
+mysql> SELECT *
+    -> FROM Customers
+    -> WHERE NOT (rating <= 100 AND city <> 'Rome');
++------+----------+----------+--------+------+
+| Cnum | Cname    | City     | Rating | Snum |
++------+----------+----------+--------+------+
+| 2002 | Giovanni | Rome     |    200 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2007 | Pereira  | Rome     |    100 | 1004 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+4) What will be the output from the following query?
+Select * from Orders
+where (amt < 1000 OR
+NOT (odate = ‘1990-10-03’
+AND cnum > 2003));
+
+mysql> select * from orders
+    -> where(amt < 1000 or
+    -> not (odate = '1990-10-03' and cnum > 2003));
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2002 | 1007 |
+| 3002 |  1900.1 | 1990-10-03 | 2001 | 1004 |
+| 3003 |  767.19 | 1990-10-03 | 2008 | 1001 |
+| 3006 | 1098.16 | 1990-10-03 | 2003 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2002 | 1002 |
+| 3008 |    4723 | 1990-10-05 | 2004 | 1001 |
+| 3009 | 1713.23 | 1990-10-04 | 2008 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2006 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2001 | 1001 |
++------+---------+------------+------+------+
+9 rows in set (0.09 sec)
+
+5) What will be the output of the following query?
+Select * from Orders
+where NOT ((odate = ‘1990-10-03’ OR snum
+>1006) AND amt >= 1500);
+-->
+mysql> select * from orders
+    -> where not((odate='1990-10-03' or snum >1006) and amt>=1500);
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2002 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2008 | 1001 |
+| 3006 | 1098.16 | 1990-10-03 | 2003 | 1007 |
+| 3007 |   75.75 | 1990-10-04 | 2002 | 1002 |
+| 3008 |    4723 | 1990-10-05 | 2004 | 1001 |
+| 3009 | 1713.23 | 1990-10-04 | 2008 | 1003 |
+| 3010 | 1309.95 | 1990-10-06 | 2006 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2001 | 1001 |
++------+---------+------------+------+------+
+8 rows in set (0.00 sec)
+
+mysql>
+
+6) What is a simpler way to write this query?
+Select snum, sname, city, comm From Salespeople where (comm > .12 OR comm <.14);
+-->
+mysql> select snum,sname,city,comm from salespeople
+    -> where(comm>.12 or comm<.14);
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
++------+---------+-----------+------+
+5 rows in set (0.00 sec)
+
+mysql>

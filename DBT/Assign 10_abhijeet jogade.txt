@@ -1,0 +1,27 @@
+1) Write a query that produces all pairs of salespeople who are living in the same city. Exclude combinations of salespeople with themselves as well as duplicate rows with the order reversed.
+-->
+mysql> SELECT DISTINCT sp1.sname AS salesperson1, sp2.sname AS salesperson2
+    -> FROM salespeople sp1
+    -> JOIN salespeople sp2 ON sp1.city = sp2.city
+    -> WHERE sp1.snum < sp2.snum;
++--------------+--------------+
+| salesperson1 | salesperson2 |
++--------------+--------------+
+| Peel         | Motika       |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+2) Write a query that produces the names and cities of all customers with the same rating as Hoffman.
+-->
+mysql> SELECT c.cname AS customer_name, c.city AS customer_city
+    -> FROM customers c
+    -> JOIN customers h ON c.rating = h.rating
+    -> WHERE h.cname = 'Hoffman';
++---------------+---------------+
+| customer_name | customer_city |
++---------------+---------------+
+| Hoffman       | London        |
+| Clemens       | London        |
+| Pereira       | Rome          |
++---------------+---------------+
+3 rows in set (0.00 sec)

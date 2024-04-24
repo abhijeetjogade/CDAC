@@ -1,0 +1,87 @@
+1) Write a query that counts all orders for October 3.
+-->
+mysql> SELECT COUNT(*) AS OrdersInOct
+    -> FROM Orders
+    -> WHERE DATE(odate) = '2024-10-03';
++-------------+
+| OrdersInOct |
++-------------+
+|           0 |
++-------------+
+1 row in set (0.02 sec)
+
+2) Write a query that counts the number of different non-NULL city values in the Customers table.
+-->
+mysql> SELECT COUNT(DISTINCT city) AS NOOfCities
+    -> FROM Customers
+    -> WHERE city IS NOT NULL;
++------------+
+| NOOfCities |
++------------+
+|          4 |
++------------+
+1 row in set (0.46 sec)
+
+3) Write a query that selects each customer’s smallest order.
+-->
+mysql> SELECT cnum, MIN(amt) AS SmallestOrder
+    ->  FROM Orders
+    ->  GROUP BY cnum;
++------+---------------+
+| cnum | SmallestOrder |
++------+---------------+
+| 2002 |         18.69 |
+| 2001 |        1900.1 |
+| 2008 |        767.19 |
+| 2007 |       5160.45 |
+| 2003 |       1098.16 |
+| 2004 |          4723 |
+| 2006 |       1309.95 |
++------+---------------+
+7 rows in set (0.00 sec)
+
+4) Write a query that selects the first customer, in alphabetical order, whose name begins with G.
+-->
+mysql> SELECT *
+    -> FROM Customers
+    -> WHERE cname LIKE 'G%'
+    -> ORDER BY cname
+    -> limit 1;
++------+----------+------+--------+------+
+| Cnum | Cname    | City | Rating | Snum |
++------+----------+------+--------+------+
+| 2002 | Giovanni | Rome |    200 | 1003 |
++------+----------+------+--------+------+
+1 row in set (0.00 sec)
+
+5) Write a query that selects the highest rating in each city.
+-->
+mysql> SELECT city, MAX(rating) AS HighestRating
+    -> FROM Customers
+    -> GROUP BY city;
++----------+---------------+
+| city     | HighestRating |
++----------+---------------+
+| London   |           100 |
+| Rome     |           200 |
+| San Jose |           300 |
+| Berlin   |           300 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+6) Write a query that counts the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once
+-->
+mysql> SELECT DATE(odate) AS OrderDate, COUNT(DISTINCT snum) AS UniqueSalespeople
+    -> FROM Orders
+    -> GROUP BY DATE(odate);
++------------+-------------------+
+| OrderDate  | UniqueSalespeople |
++------------+-------------------+
+| 1990-10-03 |                 4 |
+| 1990-10-04 |                 2 |
+| 1990-10-05 |                 1 |
+| 1990-10-06 |                 2 |
++------------+-------------------+
+4 rows in set (0.02 sec)
+
+mysql>
