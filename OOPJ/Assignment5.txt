@@ -1,0 +1,752 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Q1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter date and time (format: dd/mm/yyyy hh:mm:ss): ");
+        String inputDateTime = scanner.nextLine();
+
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(inputDateTime, inputFormatter);
+
+        System.out.println("Converted dates:");
+        System.out.println("a. " + dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        System.out.println("b. " + dateTime.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        System.out.println("c. " + dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+
+        System.out.println("\nConverted times:");
+        System.out.println("a. " + dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        System.out.println("b. " + dateTime.format(DateTimeFormatter.ofPattern("hh:mm:ss a")));
+        System.out.println("c. " + dateTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+
+        scanner.close();
+    }
+}
+
+//--------------------------------------------------------
+import java.util.*;
+public class Q2 {
+    private double height; 
+    private double weight;
+    // Constructor
+    public Q2(double height, double weight) {
+        this.height = height;
+        this.weight = weight;
+    }
+    // Getter and setter methods
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    // Method to calculate BMI
+    public double calculateBMI() {
+        return weight / (height * height);
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your height in meters: ");
+        double height = scanner.nextDouble();
+        System.out.print("Enter your weight in kilograms: ");
+        double weight = scanner.nextDouble();
+        
+        // Creating an object of the BMICalculator class
+        Q2 calculator = new Q2(height, weight);
+        
+        // Calculating BMI
+        double bmi = calculator.calculateBMI();
+        
+        // Printing the calculated BMI
+        System.out.println("Your BMI is: " + bmi);
+        
+        scanner.close();
+    }
+    
+}
+//---------------------------------------------------------
+
+public class Q3 {
+    private String title;
+    private String author;
+    private String publisher;
+    private String isbn;
+    private int year;
+    private double price;
+    private int quantity;
+    // Constructors
+    public Q3() {
+    }
+    public Q3(String title, String author, String publisher, String isbn, int year, double price, int quantity) {
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.year = year;
+        this.price = price;
+        this.quantity = quantity;
+    }
+    // Getter methods
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    // Setter methods
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    // Business Logic methods
+    // Increase quantity
+    public void increaseQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    // Decrease quantity
+    public void decreaseQuantity(int quantity) {
+        if (this.quantity >= quantity) {
+            this.quantity -= quantity;
+        } else {
+            System.out.println("Error: Not enough quantity available.");
+        }
+    }
+    // Calculate inventory value
+    public double getInventoryValue() {
+        return price * quantity;
+    }
+    public static void main(String[] args) {
+        // Create a book object
+        Q3 book = new Q3("Java Programming", "Abhijeet", "Aj Publishers", "978-3-16-148410-0", 2024, 2000, 50);
+        
+        // Test methods
+        System.out.println("Book title: " + book.getTitle());
+        System.out.println("Author: " + book.getAuthor());
+        System.out.println("Publisher: " + book.getPublisher());
+        System.out.println("ISBN: " + book.getIsbn());
+        System.out.println("Year: " + book.getYear());
+        System.out.println("Price: $" + book.getPrice());
+        System.out.println("Quantity: " + book.getQuantity());
+
+        // Increase quantity
+        book.increaseQuantity(10);
+        System.out.println("Quantity after increase: " + book.getQuantity());
+
+        // Decrease quantity
+        book.decreaseQuantity(5);
+        System.out.println("Quantity after decrease: " + book.getQuantity());
+
+        // Calculate inventory value
+        System.out.println("Inventory value: $" + book.getInventoryValue());
+    }
+
+}
+//---------------------------------------------------------
+
+public class Q4 {
+    private String customerName;
+    private double unitsConsumed;
+    private double billAmount;
+
+    public Q4(String customerName, double unitsConsumed) {
+        this.customerName = customerName;
+        this.unitsConsumed = unitsConsumed;
+    }
+    public void calculateBillAmount() {
+        if (unitsConsumed <= 100) {
+            billAmount = unitsConsumed * 5;
+        } else if (unitsConsumed <= 300) {
+            billAmount = 100 * 5 + (unitsConsumed - 100) * 7;
+        } else {
+            billAmount = 100 * 5 + 200 * 7 + (unitsConsumed - 300) * 10;
+        }
+    }
+    public void displayBill() {
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Units Consumed: " + unitsConsumed);
+        System.out.println("Bill Amount: Rs. " + billAmount);
+    }
+    public static void main(String[] args) {
+        // Creating an ElectricityBill object
+        Q4 bill = new Q4("Abhijeet", 3500);
+
+        // Calculating the bill amount
+        bill.calculateBillAmount();
+
+        // Displaying the bill details
+        bill.displayBill();
+    }
+
+}
+//--------------------------------------------------------
+
+import java.util.Scanner;
+
+public class Q5 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input from user
+        System.out.print("Enter customer name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter phone number: ");
+        String phoneNumber = scanner.nextLine();
+
+        System.out.print("Enter number of calls made: ");
+        int numberOfCalls = scanner.nextInt();
+
+        System.out.print("Enter total duration of calls (in minutes): ");
+        int totalDuration = scanner.nextInt();
+
+        // Calculating bill
+        double bill = calculateBill(numberOfCalls, totalDuration);
+
+        // Adding monthly flat rate
+        bill += 10.0;
+
+        // Output the bill
+        System.out.println("Customer: " + customerName);
+        System.out.println("Phone number: " + phoneNumber);
+        System.out.println("Total bill: $" + bill);
+
+        scanner.close();
+    }
+
+    public static double calculateBill(int numberOfCalls, int totalDuration) {
+        double bill = 0.0;
+
+        // First 100 calls are charged at a rate of 50 cents per call
+        if (numberOfCalls <= 100) {
+            bill += numberOfCalls * 0.50;
+        } else {
+            bill += 100 * 0.50; // First 100 calls
+            // Calls beyond the first 100 are charged at a rate of 25 cents per call
+            bill += (numberOfCalls - 100) * 0.25;
+        }
+
+        // All calls are subject to a minimum duration of 1 minute
+        // Calls with a duration less than 1 minute are rounded up to 1 minute
+        bill += Math.ceil(totalDuration / 60.0); // Rounding up duration to minutes
+
+        return bill;
+    }
+}
+
+//--------------------------------------------------------
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Q6 {
+    private String accountHolderName;
+    private int accountNumber;
+    private double accountBalance;
+
+    public Q6(String accountHolderName, int accountNumber) {
+        this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
+        this.accountBalance = 0.0;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void deposit(double amount) {
+        accountBalance += amount;
+        System.out.println("Amount deposited successfully. Current balance: " + accountBalance);
+    }
+
+    public void withdraw(double amount) {
+        if (accountBalance >= amount) {
+            accountBalance -= amount;
+            System.out.println("Amount withdrawn successfully. Current balance: " + accountBalance);
+        } else {
+            System.out.println("Insufficient funds. Withdrawal failed.");
+        }
+    }
+
+
+    public class BankManagementSystem {
+       private static List<Q6> accounts = new ArrayList<>();
+       private static int accountCounter = 1000;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Create a new account");
+            System.out.println("2. Deposit money into an account");
+            System.out.println("3. Withdraw money from an account");
+            System.out.println("4. Display the account balance");
+            System.out.println("5. Display the account holder's information");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    createAccount(scanner);
+                    break;
+                case 2:
+                    depositMoney(scanner);
+                    break;
+                case 3:
+                    withdrawMoney(scanner);
+                    break;
+                case 4:
+                    displayBalance(scanner);
+                    break;
+                case 5:
+                    displayAccountInfo(scanner);
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void createAccount(Scanner scanner) {
+        System.out.print("Enter account holder's name: ");
+        String accountHolderName = scanner.next();
+        int accountNumber = ++accountCounter;
+        Q6 account = new Q6(accountHolderName, accountNumber);
+        accounts.add(account);
+        System.out.println("Account created successfully. Account number: " + accountNumber);
+    }
+
+    private static void depositMoney(Scanner scanner) {
+        System.out.print("Enter account number: ");
+        int accountNumber = scanner.nextInt();
+        Q6 account = findAccount(accountNumber);
+        if (account != null) {
+            System.out.print("Enter amount to deposit: ");
+            double amount = scanner.nextDouble();
+            account.deposit(amount);
+        } else {
+            System.out.println("Invalid account number.");
+        }
+    }
+
+    private static void withdrawMoney(Scanner scanner) {
+        System.out.print("Enter account number: ");
+        int accountNumber = scanner.nextInt();
+        Q6 account = Q6(accountNumber);
+        if (account != null) {
+            System.out.print("Enter amount to withdraw: ");
+            double amount = scanner.nextDouble();
+            account.withdraw(amount);
+        } else {
+            System.out.println("Invalid account number.");
+        }
+    }
+
+    private static void displayBalance(Scanner scanner) {
+        System.out.print("Enter account number: ");
+        int accountNumber = scanner.nextInt();
+        Q6 account = findAccount(accountNumber);
+        if (account != null) {
+            System.out.println("Account balance: " + account.getAccountBalance());
+        } else {
+            System.out.println("Invalid account number.");
+        }
+    }
+
+    private static void displayAccountInfo(Scanner scanner) {
+        System.out.print("Enter account number: ");
+        int accountNumber = scanner.nextInt();
+        Q6 account = findAccount(accountNumber);
+        if (account != null) {
+            System.out.println("Account holder's name: " + account.getAccountHolderName());
+            System.out.println("Account balance: " + account.getAccountBalance());
+        } else {
+            System.out.println("Invalid account number.");
+        }
+    }
+
+    private static Q6 findAccount(int accountNumber) {
+        for (Q6 account : accounts) {
+            if (account.getAccountNumber() == accountNumber) {
+                return account;
+            }
+        }
+        return null;
+    }
+}
+}
+
+//--------------------------------------------------------
+
+import java.util.Scanner;
+
+public class Q7 {
+    private String vehicleType;
+    private int numAxles;
+    private double distanceTraveled;
+    private double tollFee;
+    private double totalAmountDue;
+
+    public void calculateTollFee() {
+        double baseRate;
+        if (vehicleType.equalsIgnoreCase("truck")) {
+            baseRate = 0.50;
+        } else {
+            baseRate = 0.25;
+        }
+        tollFee = baseRate * numAxles * distanceTraveled;
+    }
+
+    public void generateBill() {
+        totalAmountDue = tollFee + 2.00;
+        System.out.println("\nBill Information:");
+        System.out.println("Vehicle Type: " + vehicleType);
+        System.out.println("Number of Axles: " + numAxles);
+        System.out.println("Distance Traveled: " + distanceTraveled + " miles");
+        System.out.println("Toll Fee: $" + tollFee);
+        System.out.println("Total Amount Due: $" + totalAmountDue);
+    }
+
+    public void showMenu() {
+        Scanner scanner = new Scanner(System.in);
+        char choice;
+        do {
+            System.out.println("\nMenu Options:");
+            System.out.println("a. Enter vehicle type (car, van, bus, or truck)");
+            System.out.println("b. Enter number of axles");
+            System.out.println("c. Enter distance traveled");
+            System.out.println("d. Calculate toll fee");
+            System.out.println("e. Generate bill");
+            System.out.println("f. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.next().charAt(0);
+
+            switch (choice) {
+                case 'a':
+                    System.out.print("Enter vehicle type: ");
+                    vehicleType = scanner.next();
+                    break;
+                case 'b':
+                    System.out.print("Enter number of axles: ");
+                    numAxles = scanner.nextInt();
+                    break;
+                case 'c':
+                    System.out.print("Enter distance traveled: ");
+                    distanceTraveled = scanner.nextDouble();
+                    break;
+                case 'd':
+                    calculateTollFee();
+                    System.out.println("Toll fee calculated successfully.");
+                    break;
+                case 'e':
+                    if (tollFee == 0) {
+                        System.out.println("Please calculate toll fee first.");
+                    } else {
+                        generateBill();
+                    }
+                    break;
+                case 'f':
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 'f');
+        scanner.close();
+    }
+
+    public static void main(String[] args) {
+        Q7 tollBooth = new Q7();
+        tollBooth.showMenu();
+    }
+}
+
+//-------------------------------------------------------
+
+import java.util.Scanner;
+
+public class Q8 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input for the first rational number
+        System.out.println("Enter the first rational number:");
+        System.out.print("Numerator: ");
+        int num1 = scanner.nextInt();
+        System.out.print("Denominator: ");
+        int denom1 = scanner.nextInt();
+
+        // Input for the second rational number
+        System.out.println("Enter the second rational number:");
+        System.out.print("Numerator: ");
+        int num2 = scanner.nextInt();
+        System.out.print("Denominator: ");
+        int denom2 = scanner.nextInt();
+
+        // Input for the arithmetic operation
+        System.out.println("Enter the arithmetic operation (+, -, *, /): ");
+        char operation = scanner.next().charAt(0);
+
+        // Perform the arithmetic operation
+        int resultNum, resultDenom;
+        switch (operation) {
+            case '+':
+                resultNum = num1 * denom2 + num2 * denom1;
+                resultDenom = denom1 * denom2;
+                break;
+            case '-':
+                resultNum = num1 * denom2 - num2 * denom1;
+                resultDenom = denom1 * denom2;
+                break;
+            case '*':
+                resultNum = num1 * num2;
+                resultDenom = denom1 * denom2;
+                break;
+            case '/':
+                resultNum = num1 * denom2;
+                resultDenom = denom1 * num2;
+                break;
+            default:
+                System.out.println("Invalid operation!");
+                return;
+        }
+
+        // Reduce the result to its simplest form
+        int gcd = gcd(resultNum, resultDenom);
+        resultNum /= gcd;
+        resultDenom /= gcd;
+
+        // Output the result
+        System.out.println("Result: " + resultNum + "/" + resultDenom);
+
+        scanner.close();
+    }
+
+    // Method to find the greatest common divisor using Euclid's algorithm
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+}
+
+//--------------------------------------------------------
+
+public class Q9 {
+    private int day;
+    private int month;
+    private int year;
+
+    public Q9(int day, int month, int year) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
+    public boolean isValid() {
+        if (year < 1 || month < 1 || month > 12 || day < 1)
+            return false;
+
+        int[] daysInMonth = {31, 28 + (isLeapYear() ? 1 : 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        return day <= daysInMonth[month - 1];
+    }
+
+    public int getDayOfWeek() {
+        int[] t = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+        int y = year - (month < 3 ? 1 : 0);
+        int dayOfWeek = (y + y / 4 - y / 100 + y / 400 + t[month - 1] + day) % 7;
+        return (dayOfWeek == 0) ? 6 : (dayOfWeek - 1);
+    }
+
+    public boolean isLeapYear() {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
+    public Q9 getNextDay() {
+        int nextDay = day + 1;
+        int nextMonth = month;
+        int nextYear = year;
+
+        if (nextDay > daysInMonth(month, year)) {
+            nextDay = 1;
+            nextMonth++;
+            if (nextMonth > 12) {
+                nextMonth = 1;
+                nextYear++;
+            }
+        }
+
+        return new Q9(nextDay, nextMonth, nextYear);
+    }
+
+    public Q9 getPreviousDay() {
+        int previousDay = day - 1;
+        int previousMonth = month;
+        int previousYear = year;
+
+        if (previousDay < 1) {
+            previousMonth--;
+            if (previousMonth < 1) {
+                previousMonth = 12;
+                previousYear--;
+            }
+            previousDay = daysInMonth(previousMonth, previousYear);
+        }
+
+        return new Q9(previousDay, previousMonth, previousYear);
+    }
+
+    private int daysInMonth(int month, int year) {
+        if (month == 2 && isLeapYear())
+            return 29;
+        else
+            return new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}[month - 1];
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%02d-%02d-%d", day, month, year);
+    }
+
+    public static void main(String[] args) {
+        Q9 date = new Q9(31, 12, 2022);
+        System.out.println(date.isValid()); // true
+        System.out.println(date.getDayOfWeek()); // 6 (Saturday)
+        System.out.println(date.isLeapYear()); // false
+        Q9 nextDay = date.getNextDay();
+        System.out.println(nextDay); // 01-01-2023
+        Q9 previousDay = date.getPreviousDay();
+        System.out.println(previousDay); // 30-12-2022
+    }
+}
+
+//--------------------------------------------------------
+
+public class Q10 {
+    private int creditHistory;
+    private double creditUtilization;
+    private boolean paymentHistory;
+
+    // Constructors
+    public Q10(int creditHistory, double creditUtilization, boolean paymentHistory) {
+        this.creditHistory = creditHistory;
+        this.creditUtilization = creditUtilization;
+        this.paymentHistory = paymentHistory;
+    }
+
+    // Getter and setter methods
+    public int getCreditHistory() {
+        return creditHistory;
+    }
+
+    public void setCreditHistory(int creditHistory) {
+        this.creditHistory = creditHistory;
+    }
+
+    public double getCreditUtilization() {
+        return creditUtilization;
+    }
+
+    public void setCreditUtilization(double creditUtilization) {
+        this.creditUtilization = creditUtilization;
+    }
+
+    public boolean isPaymentHistory() {
+        return paymentHistory;
+    }
+
+    public void setPaymentHistory(boolean paymentHistory) {
+        this.paymentHistory = paymentHistory;
+    }
+
+    // Method to calculate credit score
+    public int calculateCreditScore() {
+        int creditScore;
+        if (paymentHistory) {
+            creditScore = (creditHistory * 15) + (int) (creditUtilization * 30) + 55;
+        } else {
+            creditScore = (creditHistory * 15) + (int) (creditUtilization * 30) + 35;
+        }
+        return creditScore;
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        Q10  calculator = new Q10(5, 0.5, true);
+        System.out.println("Credit Score: " + calculator.calculateCreditScore());
+    }
+}
+
