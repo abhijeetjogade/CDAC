@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment4</title>
+</head>
+<body>
+  <style>
+    body{
+      background-color: rgb(216, 162, 95);
+    }
+    #myForm{
+      text-align: center;
+    }
+    #output{
+      text-align: center;
+      color: brown;
+      padding: 10px;
+    }
+  </style>
+
+<h2 id="myForm" >Enter Your Details</h2>
+
+<form id="myForm">
+  <label for="firstName">First Name:</label><br>
+  <input type="text" id="firstName" name="firstName"><br>
+  <label for="lastName">Last Name:</label><br>
+  <input type="text" id="lastName" name="lastName"><br>
+  <label for="contactNo">Contact No.:</label><br>
+  <input type="text" id="contactNo" name="contactNo"><br>
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email"><br><br>
+  <input type="button" value="Submit" onclick="getFormValues()">
+</form>
+
+<div id="output"></div>
+
+<script>
+function getFormValues() {
+  // Getting form elements by their IDs
+  var firstName = document.getElementById("firstName").value;
+  var lastName = document.getElementById("lastName").value;
+  var contactNo = document.getElementById("contactNo").value;
+  var email = document.getElementById("email").value;
+
+  // Constructing the output message
+  var outputMessage = "First Name: " + firstName + "<br>";
+  outputMessage += "Last Name: " + lastName + "<br>";
+  outputMessage += "Contact No.: " + contactNo + "<br>";
+  outputMessage += "Email: " + email;
+
+  // Displaying the output message on the page
+  document.getElementById("output").innerHTML = outputMessage;
+}
+</script>
+
+</body>
+</html>

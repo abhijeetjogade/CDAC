@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment4</title>
+</head>
+<body>
+  <style>
+    body{
+      background-color: rgb(246, 243, 103);
+    }
+  </style>
+
+<h2 id="mySelect">Drop-down List</h2>
+
+<select id="mySelect">
+  <option value="1">Blue</option>
+  <option value="2">Orange</option>
+  <option value="3">green</option>
+  <option value="4">white</option>
+</select>
+
+<br><br>
+<button onclick="addItem()">Add Item</button>
+<button onclick="removeItem()">Remove Selected Item</button>
+<ul id="itemList"></ul>
+
+<script>
+  function addItem() {
+  var dropdown = document.getElementById("mySelect");
+  var selectedItem = dropdown.options[dropdown.selectedIndex].text;
+  
+  var itemList = document.getElementById("itemList");
+  var newItem = document.createElement("li");
+  newItem.textContent = selectedItem;
+  itemList.appendChild(newItem);
+}
+function removeItem() {
+  // Getting the select element
+  var selectElement = document.getElementById("mySelect");
+  
+  // Getting the index of the selected option
+  var selectedIndex = selectElement.selectedIndex;
+
+  // Removing the selected option
+  selectElement.remove(selectedIndex);
+}
+</script>
+
+</body>
+</html>

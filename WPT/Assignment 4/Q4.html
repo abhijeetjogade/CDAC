@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment4</title>
+</head>
+<body>
+
+<p id="myParagraph"><b>We</b> have just started <b>this</b> section for the users (<b>beginner</b>to intermediate) who <b>want</b> to work with <b>various </b>JavaScript <b>problems</b> and write scripts online to <b>test</b> their JavaScript <b>skill.</b></p>
+
+<p>Hover over this <a href="#" onmouseover="highlightBoldWords()">link</a> to highlight bold words.</p>
+
+<script>
+function highlightBoldWords() {
+  // Getting the paragraph element
+  var paragraph = document.getElementById("myParagraph");
+
+  // Getting all bold elements within the paragraph
+  var boldWords = paragraph.getElementsByTagName("b");
+
+  // Loop through each bold element and change its background color
+  for (var i = 0; i < boldWords.length; i++) {
+    boldWords[i].style.backgroundColor="orange"
+  }
+}
+</script>
+
+</body>
+</html>

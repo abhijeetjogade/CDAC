@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment4</title>
+<style>
+  #myParagraph {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: black;
+  }
+  body{
+    background-color: rgb(76, 129, 129);
+  }
+</style>
+</head>
+<body>
+
+<p id="myParagraph">It is rightly said that being disciplined is essential in life. When a person leads a disciplined life, they set an easy path to success. They will develop an approach to happiness and a beautiful future ahead. Being disciplined is the practice of having a scheduled daily routine which helps an individual to be punctual and hard-working. An individual is taught what being disciplined means from the time they are young. Even though discipline takes a lot of effort, the advantages of a disciplined life make it a worthwhile endeavour.</p>
+
+<button onclick="changeStyle()">Change Style</button>
+
+<script>
+function changeStyle() {
+  var paragraph = document.getElementById("myParagraph");
+  paragraph.style.fontFamily = "Times New Roman, serif";
+  paragraph.style.fontSize = "30px";
+  paragraph.style.color = "orange";
+}
+</script>
+
+</body>
+</html>
