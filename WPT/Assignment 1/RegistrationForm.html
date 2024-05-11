@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <title >Registration Form</title>
+</head>
+<body style="background-color: aqua;">
+    <h2>Registration Form</h2>
+
+    <h3>DATE OF REGISTRATION</h3>
+    <input type="number" id="registrationdate" name="registrationdate" placeholder="DD" min="1" max="31" style="width: 50px;">
+    <input type="text" id="registrationmonth" name="registrationmonth" placeholder="MM" style="width: 50px;">
+    <input type="number" id="registrationyear" name="registrationyear" placeholder="YYYY" min="1900" max="2100" style="width: 70px;"><br>
+    <h3>PERSONAL INFORMATION</h3>
+    <form action="submit.php" method="POST">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname"><br><br>
+        
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname"><br><br>
+        
+        <label for="placeofbirth">Place Of Birth:</label>
+        <input type="text" id="placeofbirth" name="placeofbirth"><br><br>
+        
+        <label for="dateofbirth">Date of Birth:</label>
+        <input type="date" id="dateofbirth" name="dateofbirth"><br><br>
+        
+        <label for="nationality">Nationality:</label>
+        <input type="text" id="nationality" name="nationality"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        
+        <label for="domicile">Domicile:</label>
+        <input type="text" id="domicile" name="domicile"><br><br>
+        
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+        
+        <label for="cpdomicile">CP Domicile:</label>
+        <input type="text" id="cpdomicile" name="cpdomicile"><br><br>
+        
+        <label for="maritalstatus">Marital Status:</label>
+        <input type="text" id="maritalstatus" name="maritalstatus"><br><br>
+        
+        <label for="starttime">Start Time:</label>
+        <input type="time" id="starttime" name="starttime"><br><br>
+        
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country"><br><br>
+        
+        <label for="postcode">Post Code:</label>
+        <input type="text" id="postcode" name="postcode"><br><br>
+        
+        <label for="nationalid">National Id No:</label>
+        <input type="text" id="nationalid" name="nationalid"><br><br>
+        
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone"><br><br>
+        
+        <h3>ADDRESS</h3>
+        <label for="presentaddress">Present Address:</label>
+        <input type="text" id="presentaddress" name="presentaddress"><br><br>
+        
+        <label for="city">The City:</label>
+        <input type="text" id="city" name="city"><br><br>
+        
+        <label for="state">Present State:</label>
+        <input type="text" id="state" name="state"><br><br>
+
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" id="Zip Code" name="Zip Code"><br><br>
