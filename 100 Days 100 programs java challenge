@@ -1,72 +1,363 @@
-1) Write a java program to find duplicate elements in an array
-
-public class Questions_100days{ 
-   public static void main(String[] args) {
-   int[] array {5,8,5,7,9,8,1,7};
-   System.out.println("Duplicate elements in the array's are: ");
-   //here we compare arrays i.e arr[i]=arr[i+1]
-   for (int i=0; i < array.length-1; i++) {
-     for (int j=i+1; j < array.length; j++) {
-       if (array[i] array[j]) {
-             System.out.println(array[i]);
-                break; //if duplicate found break
-        }
-       }
-     }
-  }
-}
-
-2)Write an efficient Java program to return the maximum occurring character in the input string
-
-public class Questions100days {
-     public static char MaxChar(String str) {
-       int[] counts = new int[256]; // ASCII CHARACTERS 256
-       char [] chars = str. toCharArray(); //string into an array of characters
-       for(char c : chars)
-       counts [ c]++;
-       char maxCharacter = 0;
-       int maxCount = 0;
-       for (int i = 0; i < counts. length; i++)
-          if (counts[i] > maxCount) {
-            maxCount = counts [i];
-            maxCharacter = (char)i; // converted Int to char
-          }
-       return maxCharacter;
-      }
-
-      public static void main(String[] args) {
-            System. out. println("Maximum occurring character is: " + MaxChar("Abhijeet"));
-       }
-}
-
-3)Write a Java program to check the equality of two arrays?
-
+1)Java program to find duplicate elements in an array:
 import java.util.*;
-class Lelo_kuch_bhi{
-    public static boolean Equalitycheck(int[] arr1, int[] arr2) {
-        if (arr1 == null || arr2 == null || arr1.length != arr2.length)
-            return false;
-        ArrayList<Integer> list1 = new ArrayList<Integer>();
-        ArrayList<Integer> list2 = new ArrayList<Integer>(); 
-        for (int num : arr1) {
-            list1.add(num);
-        }
-        for (int num : arr2) {
-            list2.add(num);
-        }
-        return list1.equals(list2);
-    }
+
+public class FindDuplicates {
     public static void main(String[] args) {
-        int[] array1 = {11, 25, 53, 84, 15};
-        int[] array2 = {12, 25, 53, 84, 15};
-        boolean Equal = Equalitycheck(array1, array2);
-        if(Equal) {
-            System.out.println("The arrays are equal.");
+        int[] arr = {1, 2, 3, 4, 5, 2, 6, 7, 8, 8};
+
+        Set<Integer> set = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+
+        for (int num : arr) {
+            if (!set.add(num)) {
+                duplicates.add(num);
+            }
+        }
+
+        System.out.println("Duplicate elements in the array: " + duplicates);
+    }
+}
+============================================================================================
+2)Java program to return the maximum occurring character in the input string:
+import java.util.HashMap;
+import java.util.Map;
+
+public class MaxOccurringCharacter {
+    public static void main(String[] args) {
+        String input = "hello";
+
+        Map<Character, Integer> charCount = new HashMap<>();
+        char[] chars = input.toCharArray();
+
+        for (char c : chars) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+
+        char maxChar = ' ';
+        int maxCount = 0;
+
+        for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxChar = entry.getKey();
+                maxCount = entry.getValue();
+            }
+        }
+
+        System.out.println("Maximum occurring character: " + maxChar);
+    }
+}
+=====================================================================================
+3) Java program to find the second largest element in an array of integers:
+import java.util.Arrays;
+
+public class SecondLargest {
+    public static void main(String[] args) {
+        int[] arr = {1, 3, 5, 7, 9, 2, 4, 6, 8};
+
+        Arrays.sort(arr);
+        int n = arr.length;
+
+        if (n < 2) {
+            System.out.println("Array doesn't have a second largest element");
         } else {
-            System.out.println("The arrays are not equal.");
+            System.out.println("Second largest element: " + arr[n - 2]);
         }
     }
 }
+===========================================================================================
+4)Java program to return the duplicate characters from a given string:
+import java.util.HashSet;
+import java.util.Set;
 
-      
-            
+public class DuplicateCharacters {
+    public static void main(String[] args) {
+        String input = "hello";
+
+        Set<Character> set = new HashSet<>();
+        Set<Character> duplicates = new HashSet<>();
+
+        for (char c : input.toCharArray()) {
+            if (!set.add(c)) {
+                duplicates.add(c);
+            }
+        }
+
+        System.out.println("Duplicate characters in the string: " + duplicates);
+    }
+}
+=============================================================================================
+5)Java program to check the equality of two arrays:
+import java.util.Arrays;
+
+public class ArrayEquality {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {1, 2, 3};
+
+        boolean isEqual = Arrays.equals(arr1, arr2);
+
+        if (isEqual) {
+            System.out.println("Arrays are equal.");
+        } else {
+            System.out.println("Arrays are not equal.");
+        }
+    }
+}
+===================================================================================================
+6)Java program to remove all the duplicate characters from a given input string:
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        String input = "hello";
+
+        Set<Character> set = new LinkedHashSet<>();
+        StringBuilder result = new StringBuilder();
+
+        for (char c : input.toCharArray()) {
+            if (set.add(c)) {
+                result.append(c);
+            }
+        }
+
+        System.out.println("String after removing duplicates: " + result);
+    }
+}
+===========================================================================================================
+7)Java program to find all pairs of elements in an integer array whose sum is equal to a given number:
+import java.util.*;
+
+public class FindPairs {
+    public static void main(String[] args) {
+        int[] arr = {2, 4, 3, 5, 7, 8, 9};
+        int targetSum = 7;
+
+        Set<Integer> set = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int num : arr) {
+            int complement = targetSum - num;
+            if (set.contains(complement)) {
+                result.add(Arrays.asList(num, complement));
+            }
+            set.add(num);
+        }
+
+        System.out.println("Pairs with sum " + targetSum + ": " + result);
+    }
+}
+============================================================================================================
+8)Java program that takes two strings as arguments and removes the characters from the first string:
+import java.util.HashSet;
+import java.util.Set;
+
+public class RemoveCharacters {
+    public static void main(String[] args) {
+        String str1 = "hello";
+        String str2 = "world";
+
+        Set<Character> set = new HashSet<>();
+        for (char c : str2.toCharArray()) {
+            set.add(c);
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (char c : str1.toCharArray()) {
+            if (!set.contains(c)) {
+                result.append(c);
+            }
+        }
+
+        System.out.println("String after removing characters: " + result);
+    }
+}
+===============================================================================================================
+9)Java program to find continuous subarrays whose sum is equal to a given number:
+public class ContinuousSubarrays {
+    public static void main(String[] args) {
+        int[] arr = {4, 2, -3, 1, 6};
+        int targetSum = 3;
+
+        int n = arr.length;
+        int currentSum = arr[0];
+        int start = 0;
+
+        for (int end = 1; end <= n; end++) {
+            while (currentSum > targetSum && start < end - 1) {
+                currentSum -= arr[start];
+                start++;
+            }
+
+            if (currentSum == targetSum) {
+                System.out.println("Subarray found between indexes " + start + " and " + (end - 1));
+            }
+
+            if (end < n) {
+                currentSum += arr[end];
+            }
+        }
+    }
+}
+=================================================================================================================
+10)Java program to test if two given strings are rotations of each other or not:
+public class RotationCheck {
+    public static void main(String[] args) {
+        String str1 = "abcd";
+        String str2 = "cdab";
+
+        if (str1.length() != str2.length()) {
+            System.out.println("Strings are not rotations of each other.");
+        } else {
+            String concatenated = str1 + str1;
+            if (concatenated.contains(str2)) {
+                System.out.println("Strings are rotations of each other.");
+            } else {
+                System.out.println("Strings are not rotations of each other.");
+            }
+        }
+    }
+}
+=====================================================================================================================
+11)Java program to reverse a string:
+public class StringReverse {
+    public static void main(String[] args) {
+        String str = "hello";
+        StringBuilder reversed = new StringBuilder();
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed.append(str.charAt(i));
+        }
+
+        System.out.println("Reversed string: " + reversed);
+    }
+}
+===============================================================================================================
+12)Java program to find the intersection of two arrays:
+import java.util.*;
+
+public class ArrayIntersection {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {4, 5, 6, 7, 8};
+
+        Set<Integer> set1 = new HashSet<>();
+        for (int num : arr1) {
+            set1.add(num);
+        }
+
+        Set<Integer> intersection = new HashSet<>();
+        for (int num : arr2) {
+            if (set1.contains(num)) {
+                intersection.add(num);
+            }
+        }
+
+        System.out.println("Intersection of arrays: " + intersection);
+    }
+}
+===============================================================================================================
+13)Java program to reverse a string:
+public class StringReverse {
+    public static void main(String[] args) {
+        String str = "hello";
+        StringBuilder reversed = new StringBuilder();
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed.append(str.charAt(i));
+        }
+
+        System.out.println("Reversed string: " + reversed);
+    }
+}
+==============================================================================================================
+14)Java program to separate zeros from non-zeros in an integer array:
+public class SeparateZeros {
+    public static void main(String[] args) {
+        int[] arr = {0, 2, 0, 1, 3, 0, 5};
+
+        int index = 0;
+        for (int num : arr) {
+            if (num != 0) {
+                arr[index++] = num;
+            }
+        }
+
+        while (index < arr.length) {
+            arr[index++] = 0;
+        }
+
+        System.out.println("Array after separating zeros: " + Arrays.toString(arr));
+    }
+}
+==================================================================================================================
+15)Java code for printing a pyramid:
+public class Pyramid {
+    public static void main(String[] args) {
+        int rows = 5;
+        for (int i = 0; i < rows; i++) {
+            for (int j = rows - i; j > 1; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j <= i; j++) {
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+===============================================================================================================
+16)Java program to find a missing number in an integer array:
+public class MissingNumber {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 4, 5, 6};
+        int n = arr.length + 1;
+        int expectedSum = n * (n + 1) / 2;
+        int actualSum = 0;
+
+        for (int num : arr) {
+            actualSum += num;
+        }
+
+        int missingNumber = expectedSum - actualSum;
+        System.out.println("Missing number in the array: " + missingNumber);
+    }
+}
+====================================================================================================
+17)Java program to count occurrences of each element in an array:
+import java.util.HashMap;
+import java.util.Map;
+
+public class ElementOccurrences {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 2, 1, 3, 4, 5, 4, 3};
+
+        Map<Integer, Integer> countMap = new HashMap<>();
+        for (int num : arr) {
+            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+        }
+
+        System.out.println("Element occurrences: " + countMap);
+    }
+}
+=====================================================================================================
+18)Java program to remove duplicate elements from an array:
+import java.util.*;
+
+public class RemoveDuplicatesFromArray {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 2, 4, 5, 6, 5, 7};
+
+        Set<Integer> set = new HashSet<>();
+        List<Integer> result = new ArrayList<>();
+
+        for (int num : arr) {
+            if (set.add(num)) {
+                result.add(num);
+            }
+        }
+
+        System.out.println("Array after removing duplicates: " + result);
+    }
+}
+=================================================================================================================
