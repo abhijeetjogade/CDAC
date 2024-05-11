@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nike</title>
+    <marquee behavior="scroll" direction="left" style="color: rgb(21, 20, 20);">Move, Shop, Customise & Celebrate With Us. New Styles on Sale: Up to 40% Off</marquee>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        background-image:url('backimg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .main{
+        height: 100vh;
+        width: 100%;
+        
+    }
+    .nav{
+        height: 110px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 50px;
+    }
+    .nav-part-1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -30px;
+    }
+    .nav img{
+        height: 80px;
+        width: auto;
+        margin-right: 60px;
+        cursor: pointer;
+    }
+    #nav a:hover{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ef8709;
+    background: white;
+    color: #6ff204;
+    }
+    .nav-part-1 ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+    }
+    .nav-part-1 ul li{
+        margin-right: 40px;
+        font-size: 19px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .nav-part-2 i{
+        margin-right: 40px;
+        font-size: 21px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .content{
+        height: calc(100% - 110px);
+        width: 100%;
+        position: relative;
+        display: flex;
+    }
+    .content-left{
+        height: 100%;
+        width: 40%;
+        padding: 80px 100px;
+    }
+    .content-left h5{
+        font-size: 20px;
+        text-transform: capitalize;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    .content-left h1{
+        font-size: 55px;
+        text-transform: uppercase;
+        color: #000;
+        margin-bottom: 25px;
+    }
+    .content-left p{
+        font-size: 20px;
+        color: #000;
+        width: 80%;
+        margin-bottom: 30px;
+    }
+    .btn{
+        background-color: #000;
+        color: #fff;
+        font-size: 15px;
+        padding: 12px 40px;
+        font-weight: 600;
+        border: none;
+        border-radius: 50px;
+        border-top-left-radius: 0;
+    }
+    .content-right{
+        height: 100%;
+        width: 60%;
+        padding: 110px 100px;
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+    .content-right::-webkit-scrollbar{
+        display: none;
+    }
+    .product{
+        height: 370px;
+        width: 250px;
+        position: relative;
+        box-shadow: 0 5px 10px rgba(17, 0, 17, 0.3);
+        display: inline-block;
+        margin-right: 20px;
+        background-color: rgb(195, 108, 108);
+    }
+    .product img{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        position: absolute;
+        bottom: 20%;
+    }
+    .product h4{
+        font-size: 18px;
+        text-transform: capitalize;
+        position: absolute;
+        bottom: 28%;
+    }
+    .catagory{
+        position: absolute;
+        bottom: 20%;
+        font-weight: 200;
+        text-transform: capitalize;
+        text-align: center;
+    }
+    .color{
+        position: absolute;
+        bottom: 15%;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+    .price{
+        font: 18px;
+        position: absolute;
+        bottom: 5%;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+    footer{
+      text-align: center;
+      background-color: rgb(51, 84, 120);
+      color: #fff;
+      padding-block: 5px;
+    }
+    </style>
+        <div class="nav">
+            <div class="nav-part-1">
+                <img src="nike-logo.png" alt="logo">
+                <ul>
+                    <li><a href=""><button class="btn">Home</button></a></li>
+                    <li><a href=""><button class="btn">Men's Section</button></a></li>
+                    <li><a href=""><button class="btn">Women's Section</button></a></li>
+                    <li><a href=""><button class="btn">Collection</button></a></li>
+                    <li><a href=""><button class="btn">contactUs</button></a></li>
+                </ul>
+            </div>
+            <div class="nav-part-2">
+                <i class="ri-search-line"></i>
+                <i class="ri-shopping-cart-2-line"></i>
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <h5>Explore limited edition</h5>
+                <h1>Nike limited edition</h1>
+                <p>Unleash the extraordinary. Elevate your game with Nike's Limited Edition. Where innovation meets style, leaving a lasting mark. Just do it.</p>
+                <button class="btn">Shop now</button>
+            </div>
+            <div class="content-right">
+                <div class="product">
+                    <img src="shoes1.png" alt="nike shoes">
+                    <h4>Nike Air max 1</h4>
+                    <p class="catagory">Men's shoes</p>
+                    <p class="color">Color: white</p>
+                    <p class="price">₹ 14,995</p>
+                </div>
+                <div class="product">
+                    <img src="shoes2.png" alt="nike shoes">
+                    <h4>Nike Air peg 2K5</h4>
+                    <p class="catagory">Men's shoes</p>
+                    <p class="color">Color: white</p>
+                    <p class="price">₹ 13,995</p>
+                </div>
+                <div class="product">
+                    <img src="shoes3.png" alt="nike shoes">
+                    <h4>Nike lunar roam</h4>
+                    <p class="catagory">Men's shoes</p>
+                    <p class="color">Color: sleepy blue</p>
+                    <p class="price">₹ 15,995</p>
+                </div>
+                <div class="product">
+                    <img src="shoes4.png" alt="nike shoes">
+                    <h4>Nike nocta glide</h4>
+                    <p class="catagory">Men's shoes</p>
+                    <p class="color">Color: white</p>
+                    <p class="price">₹ 12,995</p>
+                </div>
+                <div class="product">
+                    <img src="images/terminator-high-shoes.png" alt="nike shoes">
+                    <h4>Nike Terminator high</h4>
+                    <p class="catagory">Men's shoes</p>
+                    <p class="color">Color: sleepy blue</p>
+                    <p class="price">₹ 15 995</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <p>&copy; 2024 My Website</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+  
+</html>
