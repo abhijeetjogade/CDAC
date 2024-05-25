@@ -1,0 +1,87 @@
+.body-about-us{
+    font-family: Arial, sans-serif;
+    background-image: url('./mulback1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Adjust gap as needed */
+}
+
+.about-us, .profile {
+    background-color: aqua;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #080707;
+}
+
+.profile-info p {
+    color: #000000;
+    font-size: 14px;
+    margin: 10px 0 0;
+    line-height: 1.5;
+}
+
+.head{
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: #be4a0c;
+}
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    color: #be4a0c;
+    font-size: large;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+}
+
+.marquee button{
+    size: 20px;
+    background-color: rgb(182, 203, 49);
+    block-size: 30px;
+    border-radius: 10%;
+    border: none;
+    text-decoration: none;
+}
+
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
