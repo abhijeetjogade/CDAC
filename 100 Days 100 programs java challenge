@@ -1055,4 +1055,281 @@ public class DescendingOrderPattern {
 }
 
 =================================================================================================================
+51)Reversed Pyramid Star Pattern:
+public class ReversedPyramid {
+    public static void main(String[] args) {
+        int n = 5; // Number of rows
+        for (int i = n; i > 0; i--) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+52)Right Down Mirror Star Pattern:
+public class RightDownMirror {
+    public static void main(String[] args) {
+        int n = 5; // Number of rows
+        for (int i = n; i > 0; i--) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+53)Right Pascal’s Triangle:
+public class RightPascalsTriangle {
+    public static void main(String[] args) {
+        int n = 5; // Number of rows
+        // Upper part of the triangle
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        // Lower part of the triangle
+        for (int i = n - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+54)Left Triangle Pascal’s:
+public class LeftPascalsTriangle {
+    public static void main(String[] args) {
+        int n = 5; // Number of rows
+        // Upper part of the triangle
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        // Lower part of the triangle
+        for (int i = n - 1; i > 0; i--) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+55)Sandglass Star Pattern:
+public class SandglassPattern {
+    public static void main(String[] args) {
+        int n = 5; // Number of rows
+        // Upper part of the sandglass
+        for (int i = n; i > 0; i--) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        // Lower part of the sandglass
+        for (int i = 2; i <= n; i++) {
+            for (int j = 0; j < n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+56)Array Rotation Program in Java (Left Rotation):
+public class LeftRotation {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        int n = arr.length;
+        int d = 2; // number of rotations
+
+        leftRotate(arr, d, n);
+
+        System.out.println("Rotated Array:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    static void leftRotate(int[] arr, int d, int n) {
+        for (int i = 0; i < d; i++) {
+            leftRotateByOne(arr, n);
+        }
+    }
+
+    static void leftRotateByOne(int[] arr, int n) {
+        int temp = arr[0];
+        for (int i = 0; i < n - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[n - 1] = temp;
+    }
+}
+
+=================================================================================================================
+57)Array Rotation Program in Java (Right Rotation)
+public class RightRotation {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        int n = arr.length;
+        int d = 2; // number of rotations
+
+        rightRotate(arr, d, n);
+
+        System.out.println("Rotated Array:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    static void rightRotate(int[] arr, int d, int n) {
+        for (int i = 0; i < d; i++) {
+            rightRotateByOne(arr, n);
+        }
+    }
+
+    static void rightRotateByOne(int[] arr, int n) {
+        int temp = arr[n - 1];
+        for (int i = n - 1; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = temp;
+    }
+}
+
+=================================================================================================================
+58)Java program to find array triplets such that sum of first two elements equals the third element:
+import java.util.*;
+
+public class TripletSum {
+    static void findTriplets(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        for (int i = 0; i < n - 2; i++) {
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                if (arr[i] + arr[j] == arr[k]) {
+                    System.out.println(arr[i] + ", " + arr[j] + ", " + arr[k]);
+                    j++;
+                    k--;
+                } else if (arr[i] + arr[j] < arr[k]) {
+                    k--;
+                } else {
+                    j++;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5, 32, 1, 7, 10, 50, 19, 21, 2};
+        findTriplets(arr);
+    }
+}
+
+=================================================================================================================
+59)Java program to find triplets in the given array whose sum is equal to given number:
+import java.util.*;
+
+public class TripletSum {
+    static void findTriplets(int[] arr, int sum) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        for (int i = 0; i < n - 2; i++) {
+            int j = i + 1, k = n - 1;
+            while (j < k) {
+                if (arr[i] + arr[j] + arr[k] == sum) {
+                    System.out.println(arr[i] + ", " + arr[j] + ", " + arr[k]);
+                    j++;
+                    k--;
+                } else if (arr[i] + arr[j] + arr[k] < sum) {
+                    j++;
+                } else {
+                    k--;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5, 32, 1, 7, 10, 50, 19, 21, 2};
+        int sum = 33;
+        findTriplets(arr, sum);
+    }
+}
+
+=================================================================================================================
+60)write java code to sort an array of 0s, 1s and 2s in Java?
+public class SortColors {
+    public static void sortColors(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+        int mid = 0;
+        int temp;
+        
+        while (mid <= high) {
+            switch(nums[mid]) {
+                case 0:
+                    temp = nums[low];
+                    nums[low] = nums[mid];
+                    nums[mid] = temp;
+                    low++;
+                    mid++;
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    temp = nums[mid];
+                    nums[mid] = nums[high];
+                    nums[high] = temp;
+                    high--;
+                    break;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 0, 1, 2, 1, 0};
+        sortColors(nums);
+        System.out.println("Sorted Array:");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+=================================================================================================================
+
 
