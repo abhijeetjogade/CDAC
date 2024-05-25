@@ -361,3 +361,698 @@ public class RemoveDuplicatesFromArray {
     }
 }
 =================================================================================================================
+19)Convert Integer to Roman String
+public class IntegerToRoman {
+    public static String intToRoman(int num) {
+        int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < values.length && num >= 0; i++) {
+            while (num >= values[i]) {
+                num -= values[i];
+                sb.append(symbols[i]);
+            }
+        }
+        return sb.toString();
+    }
+}
+
+=================================================================================================================
+20) Find the Longest Palindromic Substring
+public class LongestPalindromicSubstring {
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private static int expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+}
+
+=================================================================================================================
+21) Check if a Given String Contains Valid Parentheses
+import java.util.Stack;
+
+public class ValidParentheses {
+    public static boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(') stack.push(')');
+            else if (c == '{') stack.push('}');
+            else if (c == '[') stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c) return false;
+        }
+        return stack.isEmpty();
+    }
+}
+
+=================================================================================================================
+22)Count the Number of Words in a String
+public class WordCount {
+    public static int countWords(String str) {
+        if (str == null || str.isEmpty()) {
+            return 0;
+        }
+        String[] words = str.trim().split("\\s+");
+        return words.length;
+    }
+}
+
+=================================================================================================================
+23)Remove a Given Character from a String
+public class RemoveCharacter {
+    public static String removeChar(String str, char ch) {
+        if (str == null) return null;
+        return str.replace(Character.toString(ch), "");
+    }
+}
+
+=================================================================================================================
+24) Convert Roman Numeral String to Integer
+import java.util.HashMap;
+import java.util.Map;
+
+public class RomanToInteger {
+    public static int romanToInt(String s) {
+        Map<Character, Integer> roman = new HashMap<>();
+        roman.put('I', 1);
+        roman.put('V', 5);
+        roman.put('X', 10);
+        roman.put('L', 50);
+        roman.put('C', 100);
+        roman.put('D', 500);
+        roman.put('M', 1000);
+        
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i > 0 && roman.get(s.charAt(i)) > roman.get(s.charAt(i - 1))) {
+                result += roman.get(s.charAt(i)) - 2 * roman.get(s.charAt(i - 1));
+            } else {
+                result += roman.get(s.charAt(i));
+            }
+        }
+        return result;
+    }
+}
+
+=================================================================================================================
+25)Convert String to Integer
+public class StringToInteger {
+    public static int stringToInt(String str) {
+        return Integer.parseInt(str);
+    }
+}
+
+=================================================================================================================
+26)Check if a Given String is Palindrome
+public class PalindromeCheck {
+    public static boolean isPalindrome(String s) {
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+
+=================================================================================================================
+27)Check if Two Given Strings are Anagrams of Each Other
+import java.util.Arrays;
+
+public class AnagramCheck {
+    public static boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        return Arrays.equals(sArr, tArr);
+    }
+}
+
+=================================================================================================================
+28)Find the Smallest Substring in a Given String Containing All Characters of Another String
+import java.util.HashMap;
+import java.util.Map;
+
+public class SmallestSubstringContainingAllChars {
+    public static String minWindow(String s, String t) {
+        if (s.length() == 0 || t.length() == 0) return "";
+
+        Map<Character, Integer> dictT = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            dictT.put(t.charAt(i), dictT.getOrDefault(t.charAt(i), 0) + 1);
+        }
+
+        int required = dictT.size();
+        int l = 0, r = 0;
+        int formed = 0;
+        Map<Character, Integer> windowCounts = new HashMap<>();
+        int[] ans = {-1, 0, 0}; // length, left, right
+
+        while (r < s.length()) {
+            char c = s.charAt(r);
+            windowCounts.put(c, windowCounts.getOrDefault(c, 0) + 1);
+
+            if (dictT.containsKey(c) && windowCounts.get(c).intValue() == dictT.get(c).intValue()) {
+                formed++;
+            }
+
+            while (l <= r && formed == required) {
+                c = s.charAt(l);
+                if (ans[0] == -1 || r - l + 1 < ans[0]) {
+                    ans[0] = r - l + 1;
+                    ans[1] = l;
+                    ans[2] = r;
+                }
+
+                windowCounts.put(c, windowCounts.get(c) - 1);
+                if (dictT.containsKey(c) && windowCounts.get(c).intValue() < dictT.get(c).intValue()) {
+                    formed--;
+                }
+                l++;
+            }
+            r++;
+        }
+        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
+    }
+}
+
+=================================================================================================================
+29) Finding the First Non-Repeating Character in a String
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class FirstNonRepeatingCharacter {
+    public static void main(String[] args) {
+        String str = "swiss";
+        char result = findFirstNonRepeatingCharacter(str);
+        if (result != 0) {
+            System.out.println("The first non-repeating character is: " + result);
+        } else {
+            System.out.println("No non-repeating character found.");
+        }
+    }
+
+    public static char findFirstNonRepeatingCharacter(String str) {
+        Map<Character, Integer> charCountMap = new LinkedHashMap<>();
+
+        // Count the occurrences of each character
+        for (char ch : str.toCharArray()) {
+            charCountMap.put(ch, charCountMap.getOrDefault(ch, 0) + 1);
+        }
+
+        // Find the first character with a count of 1
+        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+
+        return 0; // Return 0 if no non-repeating character is found
+    }
+}
+
+=================================================================================================================
+30)Printing All Permutations of a String
+public class StringPermutations {
+    public static void main(String[] args) {
+        String str = "ABC";
+        System.out.println("Permutations of the string are:");
+        printPermutations(str, "");
+    }
+
+    public static void printPermutations(String str, String prefix) {
+        if (str.length() == 0) {
+            System.out.println(prefix);
+            return;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            String rem = str.substring(0, i) + str.substring(i + 1);
+            printPermutations(rem, prefix + ch);
+        }
+    }
+}
+
+=================================================================================================================
+31)Pyramid Program
+public class PyramidPattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the pyramid
+        for (int i = 1; i <= rows; i++) {
+            for (int j = i; j < rows; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+32)Left Triangle Star Pattern
+public class LeftTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the pattern
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+33)Right Triangle Star Pattern
+public class RightTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the pattern
+        for (int i = 1; i <= rows; i++) {
+            for (int j = i; j < rows; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+34)Diamond Shape Pattern Program
+public class DiamondPattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the upper half of the diamond
+        for (int i = 1; i <= rows; i++) {
+            for (int j = i; j < rows; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i = rows - 1; i >= 1; i--) {
+            for (int j = rows; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+35)Downward Triangle Star Pattern
+public class DownwardTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the pattern
+        for (int i = rows; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+35) Mirrored Right Triangle Star Pattern
+public class MirroredRightTrianglePattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the pattern
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j < i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = i; k <= rows; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+37)Reversed Pyramid Star Pattern
+public class ReversedPyramid {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+38) Right Down Mirror Star Pattern
+public class RightDownMirror {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = i; k < n; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+39)Right Pascal’s Triangle
+public class RightPascalsTriangle {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i = n - 1; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+40)Left Triangle Pascal’s
+public class LeftTrianglePascals {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = 1; i <= n; i++) {
+            for (int j = i; j < n; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i = n - 1; i >= 1; i--) {
+            for (int j = n; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= i; k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+41)Sandglass Star Pattern
+public class SandglassPattern {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = i; k < n; k++) {
+                System.out.print("*");
+            }
+            for (int l = i; l < n - 1; l++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int i = n - 1; i > 0; i--) {
+            for (int j = 1; j < i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = i; k <= n; k++) {
+                System.out.print("*");
+            }
+            for (int l = i; l < n; l++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+42)Alphabet A Pattern
+public class AlphabetAPattern {
+    public static void main(String[] args) {
+        int n = 7; // height of the pattern (odd number)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= n / 2; j++) {
+                if ((j == 0 || j == n / 2) && i != 0 ||
+                    i == 0 && j != 0 && j != n / 2 ||
+                    i == n / 2) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+43)Triangle Star Pattern
+public class TriangleStarPattern {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = 1; i <= n; i++) {
+            for (int j = i; j < n; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+44)Down Triangle
+public class DownTriangle {
+    public static void main(String[] args) {
+        int n = 5; // number of rows
+        for (int i = n; i >= 1; i--) {
+            for (int j = n; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= (2 * i - 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+45)Diamond Star Pattern
+import java.util.Scanner;
+
+public class DiamondStarPattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        
+        int n = rows / 2;
+        
+        // Upper part
+        for (int i = 0; i <= n; i++) {
+            for (int j = n; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k < (2 * i + 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        // Lower part
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = n; j > i; j--) {
+                System.out.print(" ");
+            }
+            for (int k = 0; k < (2 * i + 1); k++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+46)Simple Number Program
+import java.util.Scanner;
+
+public class SimpleNumberProgram {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = scanner.nextInt();
+        
+        if (num % 2 == 0) {
+            System.out.println(num + " is an even number.");
+        } else {
+            System.out.println(num + " is an odd number.");
+        }
+        
+        boolean isPrime = true;
+        for (int i = 2; i <= num / 2; i++) {
+            if (num % i == 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        
+        if (isPrime && num > 1) {
+            System.out.println(num + " is a prime number.");
+        } else {
+            System.out.println(num + " is not a prime number.");
+        }
+    }
+}
+
+=================================================================================================================
+47)Number Pattern Program
+import java.util.Scanner;
+
+public class NumberPattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+48)Diamond Pattern Program in Java
+import java.util.Scanner;
+
+public class DiamondPattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        
+        int n = rows / 2;
+        
+        // Upper part
+        for (int i = 1; i <= n; i++) {
+            for (int j = n; j >= i; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        
+        // Lower part
+        for (int i = n - 1; i >= 1; i--) {
+            for (int j = n; j >= i; j--) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= (2 * i - 1); j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+49)Pascal’s Triangle Program in Java
+import java.util.Scanner;
+
+public class PascalsTriangle {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows - i; j++) {
+                System.out.print(" ");
+            }
+            
+            int number = 1;
+            for (int j = 0; j <= i; j++) {
+                System.out.print(number + " ");
+                number = number * (i - j) / (j + 1);
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+50)Descending Order Pattern
+import java.util.Scanner;
+
+public class DescendingOrderPattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of rows: ");
+        int rows = scanner.nextInt();
+        
+        for (int i = rows; i >= 1; i--) {
+            for (int j = i; j >= 1; j--) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+=================================================================================================================
+
