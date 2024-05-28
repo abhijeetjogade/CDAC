@@ -1331,45 +1331,668 @@ public class SortColors {
 }
 
 =================================================================================================================
-61)
+61)Write a Java program to remove duplicate elements from an array?
+import java.util.*;
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 2, 4, 5, 3, 6, 7, 5, 8, 9, 6, 10};
+
+        System.out.println("Original Array: " + Arrays.toString(array));
+
+        int[] arrayWithoutDuplicates = removeDuplicates(array);
+
+        System.out.println("Array without duplicates: " + Arrays.toString(arrayWithoutDuplicates));
+    }
+
+    public static int[] removeDuplicates(int[] array) {
+        // Use a HashSet to filter out duplicates
+        Set<Integer> set = new HashSet<>();
+        for (int num : array) {
+            set.add(num);
+        }
+
+        // Convert the set back into an array
+        int[] result = new int[set.size()];
+        int index = 0;
+        for (int num : set) {
+            result[index++] = num;
+        }
+
+        return result;
+    }
+}
+
 =================================================================================================================
-62)
+62)Write a Java program to find the most frequent element in an array?
+import java.util.*;
+
+
+public class MostFrequentElement {
+    public static void main(String[] args) {
+        int[] array = {1, 3, 2, 3, 4, 2, 3, 5, 2, 2, 6, 7, 2, 8, 9};
+
+        System.out.println("Original Array: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        int mostFrequent = findMostFrequentElement(array);
+
+        System.out.println("Most Frequent Element: " + mostFrequent);
+    }
+
+    public static int findMostFrequentElement(int[] array) {
+        // Use a HashMap to count the frequency of each element
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        for (int num : array) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Find the element with the highest frequency
+        int mostFrequentElement = array[0];
+        int maxFrequency = 0;
+
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                mostFrequentElement = entry.getKey();
+                maxFrequency = entry.getValue();
+            }
+        }
+
+        return mostFrequentElement;
+    }
+}
+
 =================================================================================================================
-63)
+63) Write a Java program to find the minimum absolute difference between any two elements of the given array?
+import java.util.*;
+
+public class MinAbsoluteDifference {
+    public static void main(String[] args) {
+        int[] array = {3, 8, 15, 1, 9, 6, 12};
+
+        System.out.println("Original Array: " + Arrays.toString(array));
+
+        int minDiff = findMinAbsoluteDifference(array);
+
+        System.out.println("Minimum Absolute Difference: " + minDiff);
+    }
+
+    public static int findMinAbsoluteDifference(int[] array) {
+        // Sort the array
+        Arrays.sort(array);
+
+        // Initialize the minimum difference to a large value
+        int minDiff = Integer.MAX_VALUE;
+
+        // Find the minimum difference by comparing adjacent elements
+        for (int i = 0; i < array.length - 1; i++) {
+            int diff = Math.abs(array[i] - array[i + 1]);
+            if (diff < minDiff) {
+                minDiff = diff;
+            }
+        }
+
+        return minDiff;
+    }
+}
+
 =================================================================================================================
-64)
+64)How to sort array elements by frequency in Java?
+import java.util.*;
+
+public class SortByFrequency {
+    public static void main(String[] args) {
+        int[] array = {4, 6, 2, 6, 4, 4, 3, 2, 2, 2, 5};
+
+        System.out.println("Original Array: " + Arrays.toString(array));
+
+        int[] sortedArray = sortByFrequency(array);
+
+        System.out.println("Array sorted by frequency: " + Arrays.toString(sortedArray));
+    }
+
+    public static int[] sortByFrequency(int[] array) {
+        // Step 1: Count the frequency of each element
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : array) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 2: Create a list from the array and sort it using a custom comparator
+        List<Integer> list = new ArrayList<>();
+        for (int num : array) {
+            list.add(num);
+        }
+
+        list.sort((a, b) -> {
+            int freqCompare = frequencyMap.get(b).compareTo(frequencyMap.get(a)); // Sort by frequency in descending order
+            if (freqCompare == 0) {
+                return Integer.compare(a, b); // Sort by natural order (ascending) if frequencies are equal
+            }
+            return freqCompare;
+        });
+
+        // Step 3: Convert the list back to an array
+        for (int i = 0; i < array.length; i++) {
+            array[i] = list.get(i);
+        }
+
+        return array;
+    }
+}
+
 =================================================================================================================
-65)
+65)How to merge two sorted or unsorted arrays into single sorted array without duplicates in Java?
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class MergeAndSortArrays {
+    public static void main(String[] args) {
+        int[] array1 = {1, 3, 5, 7, 9};
+        int[] array2 = {2, 3, 5, 6, 8, 9, 10};
+
+        int[] mergedAndSortedArray = mergeAndSort(array1, array2);
+
+        System.out.println("Merged and Sorted Array without duplicates: " + Arrays.toString(mergedAndSortedArray));
+    }
+
+    public static int[] mergeAndSort(int[] array1, int[] array2) {
+        // Step 1: Combine both arrays into a single array
+        int[] combinedArray = new int[array1.length + array2.length];
+        System.arraycopy(array1, 0, combinedArray, 0, array1.length);
+        System.arraycopy(array2, 0, combinedArray, array1.length, array2.length);
+
+        // Step 2: Remove duplicates using a LinkedHashSet to maintain insertion order
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int num : combinedArray) {
+            set.add(num);
+        }
+
+        // Step 3: Convert the set back to an array
+        int[] resultArray = new int[set.size()];
+        int index = 0;
+        for (int num : set) {
+            resultArray[index++] = num;
+        }
+
+        // Step 4: Sort the array
+        Arrays.sort(resultArray);
+
+        return resultArray;
+    }
+}
+
 =================================================================================================================
-66)
+66)How to merge two sorted arrays in Java?
+import java.util.*;
+
+public class MergeSortedArrays {
+    public static void main(String[] args) {
+        int[] array1 = {1, 3, 5, 7, 9};
+        int[] array2 = {2, 4, 6, 8, 10};
+
+        int[] mergedArray = mergeSortedArrays(array1, array2);
+
+        System.out.println("Merged Sorted Array: " + Arrays.toString(mergedArray));
+    }
+
+    public static int[] mergeSortedArrays(int[] array1, int[] array2) {
+        int length1 = array1.length;
+        int length2 = array2.length;
+        int[] mergedArray = new int[length1 + length2];
+
+        int i = 0, j = 0, k = 0;
+
+        // Merge the arrays while there are elements in both arrays
+        while (i < length1 && j < length2) {
+            if (array1[i] <= array2[j]) {
+                mergedArray[k++] = array1[i++];
+            } else {
+                mergedArray[k++] = array2[j++];
+            }
+        }
+
+        // Copy remaining elements from array1, if any
+        while (i < length1) {
+            mergedArray[k++] = array1[i++];
+        }
+
+        // Copy remaining elements from array2, if any
+        while (j < length2) {
+            mergedArray[k++] = array2[j++];
+        }
+
+        return mergedArray;
+    }
+}
+
 =================================================================================================================
-67)
+67) Write a Java program to find smallest and second smallest element in an integer array?
+public class SmallestElements {
+    public static void main(String[] args) {
+        int[] array = {12, 13, 1, 10, 34, 1};
+
+        findSmallestAndSecondSmallest(array);
+    }
+
+    public static void findSmallestAndSecondSmallest(int[] array) {
+        if (array.length < 2) {
+            System.out.println("Array should have at least two elements");
+            return;
+        }
+
+        int smallest = Integer.MAX_VALUE;
+        int secondSmallest = Integer.MAX_VALUE;
+
+        for (int num : array) {
+            if (num < smallest) {
+                secondSmallest = smallest;
+                smallest = num;
+            } else if (num < secondSmallest && num != smallest) {
+                secondSmallest = num;
+            }
+        }
+
+        if (secondSmallest == Integer.MAX_VALUE) {
+            System.out.println("No second smallest element found.");
+        } else {
+            System.out.println("Smallest element: " + smallest);
+            System.out.println("Second smallest element: " + secondSmallest);
+        }
+    }
+}
+
 =================================================================================================================
-68)
+68)Write a Java program to find array triplets such that sum of first two elements equals the third element?
+import java.util.*;
+
+
+public class FindTriplets {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+        List<List<Integer>> triplets = findTriplets(array);
+
+        if (triplets.isEmpty()) {
+            System.out.println("No triplets found.");
+        } else {
+            System.out.println("Triplets where sum of first two elements equals the third element:");
+            for (List<Integer> triplet : triplets) {
+                System.out.println(triplet);
+            }
+        }
+    }
+
+    public static List<List<Integer>> findTriplets(int[] array) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        // Iterate over all pairs (i, j) and check if array[i] + array[j] == array[k] for some k
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                int sum = array[i] + array[j];
+                for (int k = 0; k < array.length; k++) {
+                    if (k != i && k != j && array[k] == sum) {
+                        List<Integer> triplet = new ArrayList<>();
+                        triplet.add(array[i]);
+                        triplet.add(array[j]);
+                        triplet.add(array[k]);
+                        result.add(triplet);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
 =================================================================================================================
-69)
+69) right Triangle Star Pattern in java
+public class TriangleStarPattern {
+    public static void main(String[] args) {
+        int rows = 5; // Number of rows for the triangle pattern
+
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+}
+
 =================================================================================================================
-70)
+70)Simple Number Program print 1 in the form of right angle triangle
+import java.io.*;
+public class A
+{
+	public static void right_triangle(int n)
+	{
+		int i, j;
+		
+		// outer loop is used to handle number of rows
+		for(i=0; i<n; i++)
+		{
+			// inner loop is used to handle number of columns
+			for(j=0; j<=i; j++)
+			{
+				System.out.print("1 ");
+			}
+			// ending line after each row
+			System.out.println();
+		}
+}
+	
+	public static void main(String args[])
+	{
+    int n = 5;  //Number of Rows
+	right_triangle(n);
+	}
+}
 =================================================================================================================
-71)
+71)Simple Number Program print 123... in the form of right angle triangle
+import java.util.Scanner;
+ 
+public class A
+{
+    public static void main(String[] args) 
+    {
+        int rows=5; //Number of Rows
+         // Outer Loop handles the rows 
+        for (int i = 1; i <= rows; i++) 
+        {
+          // This loop handles the column values
+            for (int j = 1; j <= i; j++)
+            {
+                System.out.print(j+" ");
+            }
+             
+            System.out.println();
+        }
+    }
+}
 =================================================================================================================
-72)
+72)Diamond Pattern Program in Java
+import java.util.*;
+class Abhi {
+	public static void show(int n)
+	{
+		// sp stands for space
+		// st stands for number
+		int sp = n / 2, st = 1;
+
+		// This Outer loop for number of lines
+		for (int i = 1; i <= n; i++) {
+
+			// This Inner loop for printing space
+			for (int j = 1; j <= sp; j++)
+				System.out.print(" ");
+
+			// This Inner loop for printing number
+			int count = st / 2 + 1;
+			for (int k = 1; k <= st; k++) {
+				System.out.print(count);
+				if (k <= st / 2)
+					count--;
+				else
+					count++;
+			}
+
+			System.out.println();
+			if (i <= n / 2) {
+
+				sp = sp - 1;
+				st = st + 2;
+			}
+
+			else {
+
+				sp = sp + 1;
+				st = st - 2;
+			}
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		int n=7;
+	    show(n);
+	}
+}
 =================================================================================================================
-73)
+73)Pascal’s Triangle Program in Java
+import java.util.Scanner;
+class Abhi{
+	public static void show(int n)
+	{
+		// sp stands for space
+		// st stands for number
+		int sp = n / 2, st = 1;
+
+		// This Outer loop for number of lines
+		for (int i = 1; i <= n; i++) {
+
+			// This Inner loop for printing space
+			for (int j = 1; j <= sp; j++)
+				System.out.print(" ");
+
+			// This Inner loop for printing number
+			int count = st / 2 + 1;
+			for (int k = 1; k <= st; k++) {
+				System.out.print(count);
+				if (k <= st / 2)
+					count--;
+				else
+					count++;
+			}
+
+			System.out.println();
+			if (i <= n / 2) {
+
+				sp = sp - 1;
+				st = st + 2;
+			}
+
+			else {
+
+				sp = sp + 1;
+				st = st - 2;
+			}
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		int n=7;
+	    show(n);
+	}
+}
 =================================================================================================================
-74)
+74)Descending Order Pattern
+public class Abhi
+{
+    public static void main(String[] args) 
+    {
+         int rows = 5; //Number of rows
+         
+        for (int i = 1; i <= rows; i++) 
+        { 
+            for (int j = rows; j >= i; j--)
+            {
+                System.out.print(j+" ");
+            }
+             
+            System.out.println();
+        }
+    }
+}
 =================================================================================================================
-75)
+75)Binary Number Pattern
+public class Abhi
+{
+    public static void main(String[] args) 
+    {
+         
+        int rows = 5; //Number of rows 
+        for (int i = 1; i <= rows; i++) 
+        {
+            for (int j = 1; j <= i; j++)
+            {
+                if(j%2 == 0)
+                {
+                    System.out.print(0);
+                }
+                else
+                {
+                    System.out.print(1);
+                }
+            }
+             
+            System.out.println();
+        }
+         
+    }
+}
 =================================================================================================================
-76)
+76) Ones Pattern Program
+public class Abhi {
+
+    public static void main(String[] args) {
+         
+        int n = 5; //Number of rows
+         
+        // Outer loop for the row change
+        for(int i=1; i<=n; i++) {
+             
+            // Inner loop1 for printing spaces
+            for(int j=1; j<=(n-i); j++) {
+                 
+                // Printing the space without changing the line
+                System.out.print(" ");
+            }
+             
+            // Inner loop2 for printing ones
+            for(int k=1; k<=(2*i)-1; k++) {
+                 
+                // Printing the star without changing the line
+                System.out.print("1");
+            }
+            System.out.println();
+        }
+    }
+
+}
 =================================================================================================================
-77)
+77) Diamond Numeric Pattern
+public class Abhi
+{
+    public static void main(String[] args)
+    {
+      int row = 5; //Number of rows
+      //Outer Loop to handle number of rows for 1st half
+        for (int i = 1; i <= row; i++)
+        {
+          // This inner loop prints the spaces
+            for (int j = row - i; j >= 1; j--)
+            {
+                System.out.print(" ");
+            }
+            
+            for (int j = 1; j <= 2 * i - 1; j++)
+            {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+        //This outer loop handles number of rows for lower half
+        for (int i = row - 1; i >= 1; i--)
+        {
+            for (int j = row - i; j >= 1; j--)
+            {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= 2 * i - 1; j++)
+            {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+    }
+}
 =================================================================================================================
-78)
+78)Right Alphabetic Triangle
+public class Ninjas
+{
+    public static void main(String[] args)
+    {
+    int rows = 6; // Number of Rows
+		int alphabet = 65; // ASCII value of the first character
+		
+		for (int i = 0 ; i < rows; i++ ) 
+		{
+			for (int j = 0 ; j <= i; j++ ) 	
+			{
+			  //ASCII value is incremented and the character with that value is printed
+				System.out.print((char)(alphabet + j) + " ");
+			}
+			System.out.println();
+		}
+    }
+}
 =================================================================================================================
-79)
+79)K Shape Character Pattern
+public class Abhi {
+
+	public static void main(String[] args) {
+		int i, j, ch;
+		
+		int rows = 6;
+		for (i = rows - 1; i >= 0; i-- ) 
+		{
+			ch = 65;
+			for (j = 0 ; j <= i; j++ ) 	
+			{
+				System.out.print((char)(ch + j) + " ");
+			}
+			System.out.println();
+		}
+		
+		for (i = 1 ; i < rows; i++ ) 
+		{
+			ch = 65;
+			for (j = 0 ; j <= i; j++ ) 	
+			{
+				System.out.print((char)(ch + j) + " ");
+			}
+			System.out.println();
+		}
+	}
+}
 =================================================================================================================
-80)
+80)Triangle Character Pattern
+public class Abhi {
+  public static void main(String[] args) {
+    int rows = 6; //Number of rows
+    int ch = 65; //ASCII value of first character
+
+    for (int i = 0; i < rows; i++) {
+      // printing spaces
+      for (int j = 0; j < rows-i-1; j++) {
+        System.out.print(" ");
+      }
+      // printing alphabets
+      for (int k = 0; k < 2 * i + 1; k++) {
+        System.out.print((char)(ch+k));
+      }
+      System.out.println();
+    }
+  }
+}
 =================================================================================================================
 
 
